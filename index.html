@@ -226,13 +226,13 @@
     z-index: 15;
   }
 
-  /* マップ左下の「ぱらきち」イラスト（ポップ表示時のみ出現） */
+ /* マップ右下の「ぱらきち」イラスト（ポップ表示時のみ出現） */
   .parakichi-guide {
     display: none;
     position: absolute;
-    left: 10px;
-    bottom: 8px;
-    width: clamp(64px, 16%, 92px);
+    right: 10px;   /* left: 10px から変更（右寄せ） */
+    bottom: 24px;  /* 8px から変更（少し上に移動） */
+    width: clamp(80px, 20%, 116px); /* ひと回り大きく調整 */
     height: auto;
     z-index: 18;
     pointer-events: none;
