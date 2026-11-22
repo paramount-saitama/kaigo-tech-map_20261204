@@ -513,6 +513,62 @@
   #list-1f, #list-2f { display: none; }
   #tab-1f:checked ~ #list-1f { display: block; }
   #tab-2f:checked ~ #list-2f { display: block; }
+
+  /* ==================== アンケート案内カード ==================== */
+  .survey-card {
+    max-width: 600px;
+    margin: 16px auto 8px;
+    background: linear-gradient(135deg, #fffdfb 0%, #fdf3ec 100%);
+    border: 2px solid var(--accent-coral);
+    border-radius: 14px;
+    padding: 15px 16px;
+    box-shadow: 0 6px 16px rgba(61, 44, 36, 0.09);
+    text-align: center;
+  }
+  .survey-badge {
+    display: inline-block;
+    background-color: var(--accent-coral);
+    color: #fff;
+    font-size: 0.74rem;
+    font-weight: 700;
+    padding: 2px 11px;
+    border-radius: 999px;
+    margin-bottom: 6px;
+  }
+  .survey-title {
+    font-size: 1rem;
+    font-weight: 900;
+    color: var(--ink-main);
+    margin: 0 0 5px;
+    line-height: 1.35;
+  }
+  .survey-sub {
+    font-size: 0.79rem;
+    color: var(--ink-sub);
+    margin: 0 0 12px;
+    line-height: 1.45;
+  }
+  .survey-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    width: 100%;
+    max-width: 360px;
+    padding: 11px 18px;
+    border-radius: 999px;
+    background-color: var(--accent-coral);
+    color: #fff;
+    font-size: 0.94rem;
+    font-weight: 900;
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(240, 118, 114, 0.35);
+    transition: transform 0.12s ease, background-color 0.15s ease;
+  }
+  .survey-btn:hover {
+    background-color: var(--accent-coral-dark);
+    transform: translateY(-1px);
+  }
 </style>
 </head>
 <body>
@@ -675,7 +731,6 @@
 
         <!-- 1F マップ中央フローティングカード（1〜10） -->
         <div class="callout-layer">
-          <!-- ★1番URL -->
           <div class="callout bd-orange cb-1">
             <label for="b1f-none" class="callout-close" aria-label="閉じる">×</label>
             <div class="callout-head"><span class="badge c-orange">1</span><span class="callout-title">クリアトークカム<br> <span class="callout-sub"> ティービーアイ</span></span></div>
@@ -683,7 +738,6 @@
             <p class="callout-desc">スタッフ間の情報共有をスムーズにするインカム・コミュニケーションツールです。</p>
             <a href="https://cleartalkcom.net/" target="_blank" rel="noopener noreferrer" class="callout-link">製品ページを見る ↗</a>
           </div>
-          <!-- ★2番URL -->
           <div class="callout bd-orange cb-2">
             <label for="b1f-none" class="callout-close" aria-label="閉じる">×</label>
             <div class="callout-head"><span class="badge c-orange">2</span><span class="callout-title">CARE KARTE<br> <span class="callout-sub"> ケアコネクトジャパン</span></span></div>
@@ -691,7 +745,6 @@
             <p class="callout-desc">介護記録・請求業務を一元化し、見守り機器等ともデータ連携できる介護記録システムです。</p>
             <a href="https://www.carekarte.jp/" target="_blank" rel="noopener noreferrer" class="callout-link">製品ページを見る ↗</a>
           </div>
-          <!-- ★3番URL -->
           <div class="callout bd-purple cb-3">
             <label for="b1f-none" class="callout-close" aria-label="閉じる">×</label>
             <div class="callout-head"><span class="badge c-purple">3</span><span class="callout-title">SOELシリーズ<br> <span class="callout-sub"> マツオメディカル</span></span></div>
@@ -699,7 +752,6 @@
             <p class="callout-desc">抱え上げない移乗ケアを実現する移動式リフト。利用者様の快適さと、スタッフの身体的負担の軽減に貢献します。</p>
             <a href="https://jcls.jp/products/" target="_blank" rel="noopener noreferrer" class="callout-link">製品ページを見る ↗</a>
           </div>
-          <!-- ★4番URL -->
           <div class="callout bd-orange cb-4">
             <label for="b1f-none" class="callout-close" aria-label="閉じる">×</label>
             <div class="callout-head"><span class="badge c-orange">4</span><span class="callout-title">ココヘルパ<br> <span class="callout-sub"> ジーコム</span></span></div>
@@ -707,7 +759,6 @@
             <p class="callout-desc">スマートフォン連動型のナースコール・見守りシステムです。</p>
             <a href="https://www.gcomm.co.jp/" target="_blank" rel="noopener noreferrer" class="callout-link">製品ページを見る ↗</a>
           </div>
-          <!-- ★5番URL -->
           <div class="callout bd-pink cb-5">
             <label for="b1f-none" class="callout-close" aria-label="閉じる">×</label>
             <div class="callout-head"><span class="badge c-pink">5</span><span class="callout-title">眠りCONNECT<br> <span class="callout-sub"> パラマウントベッド</span></span></div>
@@ -715,7 +766,6 @@
             <p class="callout-desc">ベッド上の様子を端末でリアルタイムに見守り。利用者様に合わせたケアと、スタッフの負担軽減を支えます。</p>
             <a href="https://www.paramount.co.jp/connect/" target="_blank" rel="noopener noreferrer" class="callout-link">製品ページを見る ↗</a>
           </div>
-          <!-- ★6番URL -->
           <div class="callout bd-green cb-6">
             <label for="b1f-none" class="callout-close" aria-label="閉じる">×</label>
             <div class="callout-head"><span class="badge c-green">6</span><span class="callout-title">木製家具<br> <span class="callout-sub"> 紅中</span></span></div>
@@ -723,7 +773,6 @@
             <p class="callout-desc">介護施設向けの木製家具を展示しています。居室や用途に合わせた特注家具の製作が可能です。</p>
             <a href="https://venichu.co.jp/" target="_blank" rel="noopener noreferrer" class="callout-link">製品ページを見る ↗</a>
           </div>
-          <!-- ★7番URL -->
           <div class="callout bd-green cb-7">
             <label for="b1f-none" class="callout-close" aria-label="閉じる">×</label>
             <div class="callout-head"><span class="badge c-green">7</span><span class="callout-title">ネットワーク構築・保守<br> <span class="callout-sub"> RECTO（レクト）</span></span></div>
@@ -731,7 +780,6 @@
             <p class="callout-desc">「介護テクノロジー」の安定稼働に不可欠なWi-Fi・ネットワーク環境の構築と保守をご提案します。</p>
             <a href="https://recto-kb.com/" target="_blank" rel="noopener noreferrer" class="callout-link">製品ページを見る ↗</a>
           </div>
-          <!-- ★8番URL -->
           <div class="callout bd-orange cb-8">
             <label for="b1f-none" class="callout-close" aria-label="閉じる">×</label>
             <div class="callout-head"><span class="badge c-orange">8</span><span class="callout-title">VOYT<br> <span class="callout-sub"> ボイット</span></span></div>
@@ -739,7 +787,6 @@
             <p class="callout-desc">音声入力・文字起こし機能を備えた次世代のスマホインカムアプリです。</p>
             <a href="https://voyt.co.jp/" target="_blank" rel="noopener noreferrer" class="callout-link">製品ページを見る ↗</a>
           </div>
-          <!-- ★9番URL -->
           <div class="callout bd-blue cb-9">
             <label for="b1f-none" class="callout-close" aria-label="閉じる">×</label>
             <div class="callout-head"><span class="badge c-blue">9</span><span class="callout-title">シャワー式介護入浴機器<br> <span class="callout-sub"> パラマウントベッド</span></span></div>
@@ -747,7 +794,6 @@
             <p class="callout-desc">ご入居者の負担軽減とスタッフの入浴介助の省力化を両立するシャワー式入浴機器です。</p>
             <a href="https://www.paramount.co.jp/series/1/1000440" target="_blank" rel="noopener noreferrer" class="callout-link">製品ページを見る ↗</a>
           </div>
-          <!-- ★10番URL -->
           <div class="callout bd-green cb-10">
             <label for="b1f-none" class="callout-close" aria-label="閉じる">×</label>
             <div class="callout-head"><span class="badge c-green">10</span><span class="callout-title">Sleephoria（スリーフォリア）<br> <span class="callout-sub"> パラマウントウェルネス</span></span></div>
@@ -872,7 +918,6 @@
 
         <!-- 2F マップ中央フローティングカード（11〜16） -->
         <div class="callout-layer">
-          <!-- ★11番URL -->
           <div class="callout bd-green cb-11">
             <label for="b2f-none" class="callout-close" aria-label="閉じる">×</label>
             <div class="callout-head"><span class="badge c-green">11</span><span class="callout-title">PB-Method<br> <span class="callout-sub"> パラマウントベッド</span></span></div>
@@ -880,7 +925,6 @@
             <p class="callout-desc">眠りSCANをより有効に活用していただけるように専用スタッフがサポートします。<br>【オンライン】</p>
             <a href="https://www.paramount.co.jp/media/service/care-dx/support-nscan/" target="_blank" rel="noopener noreferrer" class="callout-link">製品ページを見る ↗</a>
           </div>
-          <!-- ★12番URL -->
           <div class="callout bd-yellow cb-12">
             <label for="b2f-none" class="callout-close" aria-label="閉じる">×</label>
             <div class="callout-head"><span class="badge c-yellow">12</span><span class="callout-title">おむつナビ<br> <span class="callout-sub"> 光洋</span></span></div>
@@ -888,7 +932,6 @@
             <p class="callout-desc">専用パットにセンサーを装着し、おむつの中を見える化します。利用者一人一人に沿った排泄ケアと、職員の負担軽減を実現します。</p>
             <a href="https://koyo.jp/business/onlyonecare/product/navi/" target="_blank" rel="noopener noreferrer" class="callout-link">製品ページを見る ↗</a>
           </div>
-          <!-- ★13番URL -->
           <div class="callout bd-yellow cb-13">
             <label for="b2f-none" class="callout-close" aria-label="閉じる">×</label>
             <div class="callout-head"><span class="badge c-yellow">13</span><span class="callout-title">Dfree Professional<br> <span class="callout-sub"> Dfree</span></span></div>
@@ -896,7 +939,6 @@
             <p class="callout-desc">DFreeが、尿のたまり具合を見える化しトイレの失敗を防ぎます。</p>
             <a href="https://dfree.biz/" target="_blank" rel="noopener noreferrer" class="callout-link">製品ページを見る ↗</a>
           </div>
-          <!-- ★14番URL -->
           <div class="callout bd-yellow cb-14">
             <label for="b2f-none" class="callout-close" aria-label="閉じる">×</label>
             <div class="callout-head"><span class="badge c-yellow">14</span><span class="callout-title">おむつCOLOR<br> <span class="callout-sub"> パラマウントベッド</span></span></div>
@@ -904,7 +946,6 @@
             <p class="callout-desc">おむつに取り付けたセンサーが排便を検知するとスタッフのスマホなどに通知。排便の早期発見をサポートし、おむつ交換のタイミング把握に役立ちます。</p>
             <a href="https://www.paramount.co.jp/corporate/color/" target="_blank" rel="noopener noreferrer" class="callout-link">製品ページを見る ↗</a>
           </div>
-          <!-- ★15番URL -->
           <div class="callout bd-yellow cb-15">
             <label for="b2f-none" class="callout-close" aria-label="閉じる">×</label>
             <div class="callout-head"><span class="badge c-yellow">15</span><span class="callout-title">トイレDIARY<br> <span class="callout-sub"> パラマウントベッド</span></span></div>
@@ -912,7 +953,6 @@
             <p class="callout-desc">トイレの排泄を自動で記録し、スタッフの負担を軽減します。</p>
             <a href="https://www.paramount.co.jp/corporate/diary/" target="_blank" rel="noopener noreferrer" class="callout-link">製品ページを見る ↗</a>
           </div>
-          <!-- ★16番URL -->
           <div class="callout bd-green cb-16">
             <label for="b2f-none" class="callout-close" aria-label="閉じる">×</label>
             <div class="callout-head"><span class="badge c-green">16</span><span class="callout-title">福祉用具展示コーナー<br> <span class="callout-sub"> パラマウントケアサービス</span></span></div>
@@ -961,6 +1001,16 @@
     <label for="b15" class="booth-list-item"><span class="badge c-yellow">15</span><div><span class="list-product">トイレDIARY</span><span class="list-company">（パラマウントベッド）</span></div></label>
     <label for="b16" class="booth-list-item"><span class="badge c-green">16</span><div><span class="list-product">福祉用具展示コーナー</span><span class="list-company">（パラマウントケアサービス）</span></div></label>
   </div>
+
+  <!-- ==================== アンケート案内カード ==================== -->
+  <section class="survey-card" aria-label="来場者アンケート">
+    <span class="survey-badge">ご感想・ご相談はこちら</span>
+    <h2 class="survey-title">来場者アンケートにご協力ください</h2>
+    <p class="survey-sub">気になった機器や導入のご相談・ご意見をお聞かせください（約1〜2分）</p>
+    <a href="https://forms.cloud.microsoft/r/fwiPU1NEVB" target="_blank" rel="noopener noreferrer" class="survey-btn">
+      アンケートフォームを開く ↗
+    </a>
+  </section>
 
 </body>
 </html>
