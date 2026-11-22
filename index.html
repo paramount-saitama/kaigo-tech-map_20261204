@@ -225,7 +225,26 @@
     pointer-events: auto;
     z-index: 15;
   }
-  #floor-1f .map-dim:has(~ .callout[style*="block"]),
+
+  /* マップ左下の「ぱらきち」イラスト（ポップ表示時のみ出現） */
+  .parakichi-guide {
+    display: none;
+    position: absolute;
+    left: 10px;
+    bottom: 8px;
+    width: clamp(64px, 16%, 92px);
+    height: auto;
+    z-index: 18;
+    pointer-events: none;
+    filter: drop-shadow(0 4px 8px rgba(61, 44, 36, 0.25));
+    animation: parakichiPop 0.22s ease-out;
+  }
+  @keyframes parakichiPop {
+    from { opacity: 0; transform: translateY(10px) scale(0.92); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  /* ブース選択時にオーバーレイとぱらきちを表示 */
   #b1:checked  ~ .map-container #floor-1f .map-dim,
   #b2:checked  ~ .map-container #floor-1f .map-dim,
   #b3:checked  ~ .map-container #floor-1f .map-dim,
@@ -241,7 +260,23 @@
   #b13:checked ~ .map-container #floor-2f .map-dim,
   #b14:checked ~ .map-container #floor-2f .map-dim,
   #b15:checked ~ .map-container #floor-2f .map-dim,
-  #b16:checked ~ .map-container #floor-2f .map-dim {
+  #b16:checked ~ .map-container #floor-2f .map-dim,
+  #b1:checked  ~ .map-container #floor-1f .parakichi-guide,
+  #b2:checked  ~ .map-container #floor-1f .parakichi-guide,
+  #b3:checked  ~ .map-container #floor-1f .parakichi-guide,
+  #b4:checked  ~ .map-container #floor-1f .parakichi-guide,
+  #b5:checked  ~ .map-container #floor-1f .parakichi-guide,
+  #b6:checked  ~ .map-container #floor-1f .parakichi-guide,
+  #b7:checked  ~ .map-container #floor-1f .parakichi-guide,
+  #b8:checked  ~ .map-container #floor-1f .parakichi-guide,
+  #b9:checked  ~ .map-container #floor-1f .parakichi-guide,
+  #b10:checked ~ .map-container #floor-1f .parakichi-guide,
+  #b11:checked ~ .map-container #floor-2f .parakichi-guide,
+  #b12:checked ~ .map-container #floor-2f .parakichi-guide,
+  #b13:checked ~ .map-container #floor-2f .parakichi-guide,
+  #b14:checked ~ .map-container #floor-2f .parakichi-guide,
+  #b15:checked ~ .map-container #floor-2f .parakichi-guide,
+  #b16:checked ~ .map-container #floor-2f .parakichi-guide {
     display: block;
   }
 
@@ -249,9 +284,9 @@
     display: none;
     position: absolute;
     left: 50%;
-    top: 50%;
+    top: 46%;
     transform: translate(-50%, -50%);
-    width: min(330px, 86%);
+    width: min(350px, 88%);
     background: var(--bg-card);
     border: 2.5px solid var(--accent-coral);
     border-radius: 14px;
@@ -262,7 +297,7 @@
     animation: cardPop 0.16s ease-out;
   }
   @keyframes cardPop {
-    from { opacity: 0; transform: translate(-50%, -46%) scale(0.96); }
+    from { opacity: 0; transform: translate(-50%, -42%) scale(0.96); }
     to   { opacity: 1; transform: translate(-50%, -50%) scale(1); }
   }
 
@@ -302,19 +337,7 @@
     align-items: center;
     gap: 8px;
     padding-right: 26px;
-    margin-bottom: 4px;
-  }
-  .callout-badge {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-    color: #fff;
-    font-weight: bold;
-    font-size: 0.82rem;
-    flex-shrink: 0;
+    margin-bottom: 6px;
   }
   .callout-title {
     font-weight: 700;
@@ -322,18 +345,29 @@
     color: var(--ink-main);
     line-height: 1.3;
   }
-  .callout-company {
-    display: inline-block;
-    font-size: 0.76rem;
-    font-weight: 700;
+  .callout-sub {
+    font-size: 0.85em;
+    font-weight: 500;
     color: var(--ink-sub);
-    background: var(--bg-soft);
-    padding: 2px 8px;
+    margin-left: 2px;
+  }
+  .callout-category {
+    display: inline-block;
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 2px 10px;
     border-radius: 999px;
     margin-bottom: 6px;
   }
+  .callout-category.t-orange { color: #d94e28; background-color: #fdf0ec; }
+  .callout-category.t-purple { color: #6c72a4; background-color: #f1f2f8; }
+  .callout-category.t-green  { color: #469b27; background-color: #eef7eb; }
+  .callout-category.t-pink   { color: #d95b57; background-color: #fff1f0; }
+  .callout-category.t-blue   { color: #1ba1e2; background-color: #eaf6fc; }
+  .callout-category.t-yellow { color: #9a7200; background-color: #fef9e3; }
+
   .callout-desc {
-    font-size: 0.82rem;
+    font-size: 0.84rem;
     line-height: 1.5;
     color: var(--ink-main);
     margin: 0;
@@ -390,51 +424,6 @@
   .s-yellow { background-color: #e6b800; }
   .s-green  { background-color: #469b27; }
 
-  /* 下部詳細ボックス */
-  .detail-wrapper {
-    max-width: 600px;
-    margin: 14px auto 0;
-  }
-  .detail-card {
-    display: none;
-    background: var(--bg-card);
-    border: 1.5px solid var(--border-soft);
-    border-left: 6px solid var(--accent-coral);
-    padding: 14px 16px;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(61, 44, 36, 0.08);
-  }
-
-  /* 1Fタブ選択時のみ1F詳細を表示 */
-  #tab-1f:checked ~ #b1:checked  ~ .detail-wrapper #d-b1,
-  #tab-1f:checked ~ #b2:checked  ~ .detail-wrapper #d-b2,
-  #tab-1f:checked ~ #b3:checked  ~ .detail-wrapper #d-b3,
-  #tab-1f:checked ~ #b4:checked  ~ .detail-wrapper #d-b4,
-  #tab-1f:checked ~ #b5:checked  ~ .detail-wrapper #d-b5,
-  #tab-1f:checked ~ #b6:checked  ~ .detail-wrapper #d-b6,
-  #tab-1f:checked ~ #b7:checked  ~ .detail-wrapper #d-b7,
-  #tab-1f:checked ~ #b8:checked  ~ .detail-wrapper #d-b8,
-  #tab-1f:checked ~ #b9:checked  ~ .detail-wrapper #d-b9,
-  #tab-1f:checked ~ #b10:checked ~ .detail-wrapper #d-b10 {
-    display: block;
-  }
-
-  /* 2Fタブ選択時のみ2F詳細を表示 */
-  #tab-2f:checked ~ #b11:checked ~ .detail-wrapper #d-b11,
-  #tab-2f:checked ~ #b12:checked ~ .detail-wrapper #d-b12,
-  #tab-2f:checked ~ #b13:checked ~ .detail-wrapper #d-b13,
-  #tab-2f:checked ~ #b14:checked ~ .detail-wrapper #d-b14,
-  #tab-2f:checked ~ #b15:checked ~ .detail-wrapper #d-b15,
-  #tab-2f:checked ~ #b16:checked ~ .detail-wrapper #d-b16 {
-    display: block;
-  }
-
-  .detail-header {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 6px;
-  }
   .badge {
     display: inline-flex;
     align-items: center;
@@ -453,38 +442,6 @@
   .c-pink   { background-color: #f07672; }
   .c-blue   { background-color: #1ba1e2; }
   .c-yellow { background-color: #e6b800; color: #222; }
-
-  .detail-title {
-    font-weight: 700;
-    font-size: 1.04rem;
-    color: var(--ink-main);
-  }
-  .detail-sub {
-    font-size: 0.85em;
-    font-weight: 500;
-    color: var(--ink-sub);
-  }
-  .detail-company {
-    display: inline-block;
-    font-size: 0.82rem;
-    font-weight: 700;
-    padding: 2px 10px;
-    border-radius: 999px;
-    margin-bottom: 6px;
-  }
-  .detail-company.t-orange { color: #d94e28; background-color: #fdf0ec; }
-  .detail-company.t-purple { color: #6c72a4; background-color: #f1f2f8; }
-  .detail-company.t-green  { color: #469b27; background-color: #eef7eb; }
-  .detail-company.t-pink   { color: #d95b57; background-color: #fff1f0; }
-  .detail-company.t-blue   { color: #1ba1e2; background-color: #eaf6fc; }
-  .detail-company.t-yellow { color: #9a7200; background-color: #fef9e3; }
-
-  .detail-desc {
-    font-size: 0.9rem;
-    line-height: 1.55;
-    color: var(--ink-main);
-    margin: 0;
-  }
 
   /* 全ブース一覧リスト */
   .list-container {
@@ -612,7 +569,7 @@
           <text x="505" y="46" fill="#fff" font-size="14" font-weight="bold" text-anchor="middle">受</text>
           <text x="505" y="64" fill="#fff" font-size="14" font-weight="bold" text-anchor="middle">付</text>
 
-          <!-- 入口（背景を周囲と同色に） -->
+          <!-- 入口 -->
           <rect x="518" y="75" width="62" height="52" fill="#faf7f4" />
           <text x="530" y="106" fill="#3d2c24" font-size="18" font-weight="bold" text-anchor="middle">≪</text>
           <text x="562" y="105" fill="#3d2c24" font-size="14" font-weight="bold" text-anchor="middle">入口</text>
@@ -622,7 +579,7 @@
           <text x="182" y="160" fill="#3d2c24" font-size="13" font-weight="bold" text-anchor="middle">センサー</text>
           <text x="182" y="177" fill="#3d2c24" font-size="13" font-weight="bold" text-anchor="middle">ベッド</text>
           
-          <!-- 1F トイレ ピクトグラム（背景 #faf7f4） -->
+          <!-- 1F トイレ ピクトグラム -->
           <rect x="370" y="338" width="45" height="49" rx="3" fill="#faf7f4" />
           <g fill="#004499">
             <circle cx="382" cy="347" r="3.2" />
@@ -692,66 +649,69 @@
         <!-- 背景タップで閉じるオーバーレイ -->
         <label for="b1f-none" class="map-dim" aria-label="カードを閉じる"></label>
 
+        <!-- マップ左下のぱらきち -->
+        <img src="parakichi.png" alt="ぱらきち" class="parakichi-guide">
+
         <!-- 1F マップ中央フローティングカード（1〜10） -->
         <div class="callout-layer">
           <div class="callout bd-orange cb-1">
             <label for="b1f-none" class="callout-close" aria-label="閉じる">×</label>
-            <div class="callout-head"><span class="callout-badge c-orange">1</span><span class="callout-title">クリアトークカム</span></div>
-            <div class="callout-company">ティービーアイ</div>
+            <div class="callout-head"><span class="badge c-orange">1</span><span class="callout-title">クリアトークカム <span class="callout-sub"> ティービーアイ</span></span></div>
+            <div class="callout-category t-orange">介護業務支援</div>
             <p class="callout-desc">スタッフ間の情報共有をスムーズにするインカム・コミュニケーションツールです。</p>
           </div>
           <div class="callout bd-orange cb-2">
             <label for="b1f-none" class="callout-close" aria-label="閉じる">×</label>
-            <div class="callout-head"><span class="callout-badge c-orange">2</span><span class="callout-title">CARE KARTE</span></div>
-            <div class="callout-company">ケアコネクトジャパン</div>
+            <div class="callout-head"><span class="badge c-orange">2</span><span class="callout-title">CARE KARTE（ケアカルテ） <span class="callout-sub"> ケアコネクトジャパン</span></span></div>
+            <div class="callout-category t-orange">介護業務支援</div>
             <p class="callout-desc">介護記録・請求業務を一元化し、見守り機器等ともデータ連携できる介護記録システムです。</p>
           </div>
           <div class="callout bd-purple cb-3">
             <label for="b1f-none" class="callout-close" aria-label="閉じる">×</label>
-            <div class="callout-head"><span class="callout-badge c-purple">3</span><span class="callout-title">SOELシリーズ</span></div>
-            <div class="callout-company">マツオメディカル</div>
+            <div class="callout-head"><span class="badge c-purple">3</span><span class="callout-title">SOELシリーズ <span class="callout-sub"> マツオメディカル</span></span></div>
+            <div class="callout-category t-purple">移乗支援（非装着）</div>
             <p class="callout-desc">現場の介護業務やケアの質向上をサポートする製品シリーズです。</p>
           </div>
           <div class="callout bd-orange cb-4">
             <label for="b1f-none" class="callout-close" aria-label="閉じる">×</label>
-            <div class="callout-head"><span class="callout-badge c-orange">4</span><span class="callout-title">ココヘルパ</span></div>
-            <div class="callout-company">ジーコム</div>
+            <div class="callout-head"><span class="badge c-orange">4</span><span class="callout-title">ココヘルパ <span class="callout-sub"> ジーコム</span></span></div>
+            <div class="callout-category t-orange">介護業務支援</div>
             <p class="callout-desc">スマートフォン連動型のナースコール・見守りシステムです。</p>
           </div>
           <div class="callout bd-pink cb-5">
             <label for="b1f-none" class="callout-close" aria-label="閉じる">×</label>
-            <div class="callout-head"><span class="callout-badge c-pink">5</span><span class="callout-title">眠りCONNECT</span></div>
-            <div class="callout-company">パラマウントベッド</div>
+            <div class="callout-head"><span class="badge c-pink">5</span><span class="callout-title">眠りCONNECT <span class="callout-sub"> パラマウントベッド</span></span></div>
+            <div class="callout-category t-pink">見守り・コミュニケーション</div>
             <p class="callout-desc">見守り支援システム「眠りSCAN」と各種機器・記録ソフトをつなぎ、介護現場のDXを実現します。</p>
           </div>
           <div class="callout bd-green cb-6">
             <label for="b1f-none" class="callout-close" aria-label="閉じる">×</label>
-            <div class="callout-head"><span class="callout-badge c-green">6</span><span class="callout-title">木製家具</span></div>
-            <div class="callout-company">紅中</div>
-            <p class="callout-desc">介護施設向けの木製家具を展示しています。居室や用途に合わせた特注家具の製作が可能です。</p>
+            <div class="callout-head"><span class="badge c-green">6</span><span class="callout-title">木製家具 <span class="callout-sub"> 紅中</span></span></div>
+            <div class="callout-category t-green">その他</div>
+            <p class="callout-desc">介護施設向けの木製家具を展示しています。<br>居室や用途に合わせた特注家具の製作が可能です。</p>
           </div>
           <div class="callout bd-green cb-7">
             <label for="b1f-none" class="callout-close" aria-label="閉じる">×</label>
-            <div class="callout-head"><span class="callout-badge c-green">7</span><span class="callout-title">ネットワーク構築・保守</span></div>
-            <div class="callout-company">RECTO（レクト）</div>
+            <div class="callout-head"><span class="badge c-green">7</span><span class="callout-title">ネットワーク構築・保守 <span class="callout-sub"> RECTO（レクト）</span></span></div>
+            <div class="callout-category t-green">その他</div>
             <p class="callout-desc">介護テクノロジーの安定稼働に不可欠な施設内Wi-Fi・ネットワーク環境の構築と保守をご提案します。</p>
           </div>
           <div class="callout bd-orange cb-8">
             <label for="b1f-none" class="callout-close" aria-label="閉じる">×</label>
-            <div class="callout-head"><span class="callout-badge c-orange">8</span><span class="callout-title">VOYT</span></div>
-            <div class="callout-company">ボイット</div>
+            <div class="callout-head"><span class="badge c-orange">8</span><span class="callout-title">VOYT <span class="callout-sub"> ボイット</span></span></div>
+            <div class="callout-category t-orange">介護業務支援</div>
             <p class="callout-desc">音声入力・文字起こし機能を備えた次世代のスマホインカムアプリです。</p>
           </div>
           <div class="callout bd-blue cb-9">
             <label for="b1f-none" class="callout-close" aria-label="閉じる">×</label>
-            <div class="callout-head"><span class="callout-badge c-blue">9</span><span class="callout-title">シャワー式介護入浴機器</span></div>
-            <div class="callout-company">パラマウントベッド</div>
+            <div class="callout-head"><span class="badge c-blue">9</span><span class="callout-title">シャワー式介護入浴機器 <span class="callout-sub"> パラマウントベッド</span></span></div>
+            <div class="callout-category t-blue">入浴支援</div>
             <p class="callout-desc">ご入居者の負担軽減とスタッフの入浴介助の省力化を両立するシャワー式入浴機器です。</p>
           </div>
           <div class="callout bd-green cb-10">
             <label for="b1f-none" class="callout-close" aria-label="閉じる">×</label>
-            <div class="callout-head"><span class="callout-badge c-green">10</span><span class="callout-title">Sleephoria（スリーフォリア）</span></div>
-            <div class="callout-company">パラマウントウェルネス</div>
+            <div class="callout-head"><span class="badge c-green">10</span><span class="callout-title">Sleephoria（スリーフォリア） <span class="callout-sub"> パラマウントウェルネス</span></span></div>
+            <div class="callout-category t-green">その他</div>
             <p class="callout-desc">睡眠の質を高め、健やかな毎日をサポートする睡眠ソリューションです。</p>
           </div>
         </div>
@@ -809,14 +769,14 @@
           <!-- EV -->
           <text x="457.5" y="314" fill="#3d2c24" font-size="16" font-weight="bold" text-anchor="middle">EV</text>
 
-          <!-- 喫煙所マーク（背景 #faf7f4） -->
+          <!-- 喫煙所マーク -->
           <rect x="201" y="338" width="40" height="40" fill="#faf7f4" />
           <circle cx="221" cy="358" r="16" fill="none" stroke="#3a85c6" stroke-width="3" />
           <line x1="210" y1="369" x2="232" y2="347" stroke="#3a85c6" stroke-width="2.5" />
           <rect x="210" y="356" width="16" height="4" fill="#333" />
           <rect x="227" y="356" width="4" height="4" fill="#c94a38" />
 
-          <!-- 2F トイレ ピクトグラム（背景 #faf7f4） -->
+          <!-- 2F トイレ ピクトグラム -->
           <rect x="370" y="386" width="44" height="48" rx="3" fill="#faf7f4" />
           <g fill="#004499">
             <circle cx="381" cy="395" r="3.2" />
@@ -866,42 +826,45 @@
         <!-- 背景タップで閉じるオーバーレイ -->
         <label for="b2f-none" class="map-dim" aria-label="カードを閉じる"></label>
 
+        <!-- マップ左下のぱらきち -->
+        <img src="parakichi.png" alt="ぱらきち" class="parakichi-guide">
+
         <!-- 2F マップ中央フローティングカード（11〜16） -->
         <div class="callout-layer">
           <div class="callout bd-green cb-11">
             <label for="b2f-none" class="callout-close" aria-label="閉じる">×</label>
-            <div class="callout-head"><span class="callout-badge c-green">11</span><span class="callout-title">PB-Method【オンライン】</span></div>
-            <div class="callout-company">パラマウントベッド</div>
-            <p class="callout-desc">眠りSCANをより有効に活用していただけるように専用スタッフがサポートします。</p>
+            <div class="callout-head"><span class="badge c-green">11</span><span class="callout-title">PB-Method <span class="callout-sub"> パラマウントベッド</span></span></div>
+            <div class="callout-category t-green">その他</div>
+            <p class="callout-desc">眠りSCANをより有効に活用していただけるように専用スタッフがサポートします。<br>【オンライン】</p>
           </div>
           <div class="callout bd-yellow cb-12">
             <label for="b2f-none" class="callout-close" aria-label="閉じる">×</label>
-            <div class="callout-head"><span class="callout-badge c-yellow">12</span><span class="callout-title">おむつナビ</span></div>
-            <div class="callout-company">光洋</div>
-            <p class="callout-desc">専用パットにセンサーを装着し、今まで見えなかったおむつの中を見える化します。</p>
+            <div class="callout-head"><span class="badge c-yellow">12</span><span class="callout-title">おむつナビ <span class="callout-sub"> 光洋</span></span></div>
+            <div class="callout-category t-yellow">排泄支援（排泄予測・検知）</div>
+            <p class="callout-desc">専用パットにセンサーを装着し、今まで見えなかったおむつの中を見える化します。<br>利用者一人一人に沿った排泄ケアと、職員の負担軽減を実現します。</p>
           </div>
           <div class="callout bd-yellow cb-13">
             <label for="b2f-none" class="callout-close" aria-label="閉じる">×</label>
-            <div class="callout-head"><span class="callout-badge c-yellow">13</span><span class="callout-title">Dfree Professional</span></div>
-            <div class="callout-company">Dfree</div>
+            <div class="callout-head"><span class="badge c-yellow">13</span><span class="callout-title">Dfree Professional <span class="callout-sub"> Dfree</span></span></div>
+            <div class="callout-category t-yellow">排泄支援（排泄予測・検知）</div>
             <p class="callout-desc">DFreeが、尿のたまり具合を見える化しトイレの失敗を防ぎます。</p>
           </div>
           <div class="callout bd-yellow cb-14">
             <label for="b2f-none" class="callout-close" aria-label="閉じる">×</label>
-            <div class="callout-head"><span class="callout-badge c-yellow">14</span><span class="callout-title">おむつCOLOR</span></div>
-            <div class="callout-company">パラマウントベッド</div>
-            <p class="callout-desc">センサーが排便を検知するとスマホに通知。交換タイミングの把握に役立ちます。</p>
+            <div class="callout-head"><span class="badge c-yellow">14</span><span class="callout-title">おむつCOLOR <span class="callout-sub"> パラマウントベッド</span></span></div>
+            <div class="callout-category t-yellow">排泄支援（排泄予測・検知）</div>
+            <p class="callout-desc">紙おむつに取り付けたセンサーが排便を検知すると、スタッフのスマホなどに通知。<br>排便の早期発見をサポートし、おむつ交換のタイミング把握に役立ちます。</p>
           </div>
           <div class="callout bd-yellow cb-15">
             <label for="b2f-none" class="callout-close" aria-label="閉じる">×</label>
-            <div class="callout-head"><span class="callout-badge c-yellow">15</span><span class="callout-title">トイレDIARY</span></div>
-            <div class="callout-company">パラマウントベッド</div>
+            <div class="callout-head"><span class="badge c-yellow">15</span><span class="callout-title">トイレDIARY <span class="callout-sub"> パラマウントベッド</span></span></div>
+            <div class="callout-category t-yellow">排泄支援（排泄予測・検知）</div>
             <p class="callout-desc">トイレの排泄を自動で記録し、スタッフの負担を軽減します。</p>
           </div>
           <div class="callout bd-green cb-16">
             <label for="b2f-none" class="callout-close" aria-label="閉じる">×</label>
-            <div class="callout-head"><span class="callout-badge c-green">16</span><span class="callout-title">福祉用具展示コーナー</span></div>
-            <div class="callout-company">パラマウントケアサービス</div>
+            <div class="callout-head"><span class="badge c-green">16</span><span class="callout-title">福祉用具展示コーナー <span class="callout-sub"> パラマウントケアサービス</span></span></div>
+            <div class="callout-category t-green">その他</div>
             <p class="callout-desc">介護現場やご自宅での生活を支える各種福祉用具を体験いただけます。</p>
           </div>
         </div>
@@ -918,96 +881,6 @@
       <div class="legend-item"><span class="legend-swatch s-green"></span><span>その他</span></div>
     </div>
 
-  </div>
-
-  <!-- ==================== 番号に連動する詳細表示エリア ==================== -->
-  <div class="detail-wrapper">
-    <!-- 1F 詳細カード（1〜10） -->
-    <div class="detail-card" id="d-b1">
-      <div class="detail-header"><span class="badge c-orange">1</span><span class="detail-title">クリアトークカム <span class="detail-sub"> ティービーアイ</span></span></div>
-      <div class="detail-company t-orange">介護業務支援</div>
-      <p class="detail-desc">スタッフ間の情報共有をスムーズにするインカム・コミュニケーションツールです。</p>
-    </div>
-    <div class="detail-card" id="d-b2">
-      <div class="detail-header"><span class="badge c-orange">2</span><span class="detail-title">CARE KARTE（ケアカルテ） <span class="detail-sub"> ケアコネクトジャパン</span></span></div>
-      <div class="detail-company t-orange">介護業務支援</div>
-      <p class="detail-desc">介護記録・請求業務を一元化し、見守り機器等ともデータ連携できる介護記録システムです。</p>
-    </div>
-    <div class="detail-card" id="d-b3">
-      <div class="detail-header"><span class="badge c-purple">3</span><span class="detail-title">SOELシリーズ <span class="detail-sub"> マツオメディカル</span></span></div>
-      <div class="detail-company t-purple">移乗支援（非装着）</div>
-      <p class="detail-desc">現場の介護業務やケアの質向上をサポートする製品シリーズです。</p>
-    </div>
-    <div class="detail-card" id="d-b4">
-      <div class="detail-header"><span class="badge c-orange">4</span><span class="detail-title">ココヘルパ <span class="detail-sub"> ジーコム</span></span></div>
-      <div class="detail-company t-orange">介護業務支援</div>
-      <p class="detail-desc">スマートフォン連動型のナースコール・見守りシステムです。</p>
-    </div>
-    <div class="detail-card" id="d-b5">
-      <div class="detail-header"><span class="badge c-pink">5</span><span class="detail-title">眠りCONNECT <span class="detail-sub"> パラマウントベッド</span></span></div>
-      <div class="detail-company t-pink">見守り・コミュニケーション</div>
-      <p class="detail-desc">見守り支援システム「眠りSCAN」と各種機器・記録ソフトをつなぎ、介護現場のDXを実現します。</p>
-    </div>
-    <div class="detail-card" id="d-b6">
-      <div class="detail-header"><span class="badge c-green">6</span><span class="detail-title">木製家具 <span class="detail-sub"> 紅中</span></span></div>
-      <div class="detail-company t-green">その他</div>
-      <p class="detail-desc">介護施設向けの木製家具を展示しています。<br>
-居室や用途に合わせた特注家具の製作が可能です。</p>
-    </div>
-    <div class="detail-card" id="d-b7">
-      <div class="detail-header"><span class="badge c-green">7</span><span class="detail-title">ネットワーク構築・保守 <span class="detail-sub"> RECTO（レクト）</span></span></div>
-      <div class="detail-company t-green">その他</div>
-      <p class="detail-desc">介護テクノロジーの安定稼働に不可欠な施設内Wi-Fi・ネットワーク環境の構築と保守をご提案します。</p>
-    </div>
-    <div class="detail-card" id="d-b8">
-      <div class="detail-header"><span class="badge c-orange">8</span><span class="detail-title">VOYT <span class="detail-sub"> ボイット</span></span></div>
-      <div class="detail-company t-orange">介護業務支援</div>
-      <p class="detail-desc">音声入力・文字起こし機能を備えた次世代のスマホインカムアプリです。</p>
-    </div>
-    <div class="detail-card" id="d-b9">
-      <div class="detail-header"><span class="badge c-blue">9</span><span class="detail-title">シャワー式介護入浴機器 <span class="detail-sub"> パラマウントベッド</span></span></div>
-      <div class="detail-company t-blue">入浴支援</div>
-      <p class="detail-desc">ご入居者の負担軽減とスタッフの入浴介助の省力化を両立するシャワー式入浴機器です。</p>
-    </div>
-    <div class="detail-card" id="d-b10">
-      <div class="detail-header"><span class="badge c-green">10</span><span class="detail-title">Sleephoria（スリーフォリア） <span class="detail-sub"> パラマウントウェルネス</span></span></div>
-      <div class="detail-company t-green">その他</div>
-      <p class="detail-desc">睡眠の質を高め、健やかな毎日をサポートする睡眠ソリューションです。</p>
-    </div>
-
-    <!-- 2F 詳細カード（11〜16） -->
-    <div class="detail-card" id="d-b11">
-      <div class="detail-header"><span class="badge c-green">11</span><span class="detail-title">PB-Method <span class="detail-sub"> パラマウントベッド</span></span></div>
-      <div class="detail-company t-green">その他</div>
-      <p class="detail-desc">眠りSCANをより有効に活用していただけるように専用スタッフがサポートします。<br>【オンライン】</p>
-    </div>
-    <div class="detail-card" id="d-b12">
-      <div class="detail-header"><span class="badge c-yellow">12</span><span class="detail-title">おむつナビ <span class="detail-sub"> 光洋</span></span></div>
-      <div class="detail-company t-yellow">排泄支援（排泄予測・検知）</div>
-      <p class="detail-desc">専用パットにセンサーを装着し、今まで見えなかったおむつの中を見える化します。<br>
-利用者一人一人に沿った排泄ケアと、職員の負担軽減を実現します。</p>
-    </div>
-    <div class="detail-card" id="d-b13">
-      <div class="detail-header"><span class="badge c-yellow">13</span><span class="detail-title">Dfree Professional <span class="detail-sub"> Dfree</span></span></div>
-      <div class="detail-company t-yellow">排泄支援（排泄予測・検知）</div>
-      <p class="detail-desc">DFreeが、尿のたまり具合を見える化しトイレの失敗を防ぎます。</p>
-    </div>
-    <div class="detail-card" id="d-b14">
-      <div class="detail-header"><span class="badge c-yellow">14</span><span class="detail-title">おむつCOLOR <span class="detail-sub"> パラマウントベッド</span></span></div>
-      <div class="detail-company t-yellow">排泄支援（排泄予測・検知）</div>
-      <p class="detail-desc">紙おむつに取り付けたセンサーが排便を検知すると、スタッフのスマホなどに通知。<br>
-排便の早期発見をサポートし、おむつ交換のタイミング把握に役立ちます。</p>
-    </div>
-    <div class="detail-card" id="d-b15">
-      <div class="detail-header"><span class="badge c-yellow">15</span><span class="detail-title">トイレDIARY <span class="detail-sub"> パラマウントベッド</span></span></div>
-      <div class="detail-company t-yellow">排泄支援（排泄予測・検知）</div>
-      <p class="detail-desc">トイレの排泄を自動で記録し、スタッフの負担を軽減します。</p>
-    </div>
-    <div class="detail-card" id="d-b16">
-      <div class="detail-header"><span class="badge c-green">16</span><span class="detail-title">福祉用具展示コーナー <span class="detail-sub"> パラマウントケアサービス</span></span></div>
-      <div class="detail-company t-green">その他</div>
-      <p class="detail-desc">介護現場やご自宅での生活を支える各種福祉用具を体験いただけます。</p>
-    </div>
   </div>
 
   <!-- ==================== 1階 全ブース一覧（1〜10） ==================== -->
