@@ -12,6 +12,7 @@
     --bg-page: #ebe6e0;
     --bg-card: #fffdfb;
     --bg-soft: #f6efe9;
+    --bg-map: #faf7f4;
     --ink-main: #3d2c24;
     --ink-sub: #6b564c;
     --accent-coral: #f07672;
@@ -139,7 +140,7 @@
   .svg-wrapper {
     position: relative;
     width: 100%;
-    background: #faf7f4;
+    background: var(--bg-map);
     border-radius: 10px;
     border: 1px solid #ede4dc;
     overflow: visible;
@@ -216,7 +217,7 @@
   .callout {
     display: none;
     position: absolute;
-    width: min(312px, 84vw);
+    width: min(300px, 86vw);
     background: var(--bg-card);
     border: 2.5px solid var(--accent-coral);
     border-radius: 12px;
@@ -361,9 +362,9 @@
   }
 
   /* 1F 吹き出し配置 */
-  .cb-1  { left: 14%; top: 17.5%; --tail-x: 28%; }
-  .cb-2  { left: 6%;  top: 17.5%; --tail-x: 19%; }
-  .cb-3  { left: 3%;  top: 17.5%; --tail-x: 42px; }
+  .cb-1  { left: 22%; top: 17.5%; --tail-x: 52%; }
+  .cb-2  { left: 10%; top: 17.5%; --tail-x: 54%; }
+  .cb-3  { left: 3%;  top: 17.5%; --tail-x: 24%; }
   .cb-4  { left: 15%; top: 19.5%; }
   .cb-5  { left: 15%; top: 38%; }
   .cb-6  { left: 4%;  bottom: 33.5%; --tail-x: 68px; }
@@ -372,13 +373,13 @@
   .cb-9  { left: 4%;  bottom: 17%; --tail-x: 54px; }
   .cb-10 { right: 31%; top: 18%; }
 
-  /* 2F 吹き出し配置 */
-  .cb-11 { left: 12%; bottom: 54%; --tail-x: 25%; }
-  .cb-12 { left: 4%;  bottom: 54%; --tail-x: 16%; }
+  /* 2F 吹き出し配置（11, 12, 14, 15 は矢印が中央寄りになるよう調整、16 は下に表示） */
+  .cb-11 { left: 20%; bottom: 54%; --tail-x: 55%; }
+  .cb-12 { left: 6%;  bottom: 54%; --tail-x: 42%; }
   .cb-13 { left: 24%; top: 27%; }
-  .cb-14 { left: 4%;  top: 21.5%; --tail-x: 16%; }
-  .cb-15 { left: 10%; top: 21.5%; --tail-x: 23%; }
-  .cb-16 { right: 53%; top: 10%; }
+  .cb-14 { left: 6%;  top: 21.5%; --tail-x: 42%; }
+  .cb-15 { left: 18%; top: 21.5%; --tail-x: 54%; }
+  .cb-16 { left: 36%; top: 30.5%; --tail-x: 56%; }
 
   /* 選択された吹き出しを表示（1F） */
   #b1:checked  ~ .map-container .cb-1,
@@ -399,6 +400,21 @@
   #b15:checked ~ .map-container .cb-15,
   #b16:checked ~ .map-container .cb-16 {
     display: block;
+  }
+
+  /* スマホ画面向けの微調整 */
+  @media (max-width: 480px) {
+    .callout {
+      width: min(270px, 84vw);
+      padding: 8px 10px;
+    }
+    .cb-1  { left: 14%; --tail-x: 62%; }
+    .cb-2  { left: 5%;  --tail-x: 56%; }
+    .cb-11 { left: 14%; --tail-x: 62%; }
+    .cb-12 { left: 4%;  --tail-x: 44%; }
+    .cb-14 { left: 4%;  --tail-x: 44%; }
+    .cb-15 { left: 12%; --tail-x: 58%; }
+    .cb-16 { left: 18%; top: 30.5%; --tail-x: 78%; }
   }
 
   /* 1F・2F共通 色凡例 */
@@ -653,8 +669,8 @@
           <text x="505" y="46" fill="#fff" font-size="14" font-weight="bold" text-anchor="middle">受</text>
           <text x="505" y="64" fill="#fff" font-size="14" font-weight="bold" text-anchor="middle">付</text>
 
-          <!-- 入口 -->
-          <rect x="518" y="75" width="62" height="52" fill="#f5decb" />
+          <!-- 入口（背景を周囲と同色に） -->
+          <rect x="518" y="75" width="62" height="52" fill="#faf7f4" />
           <text x="530" y="106" fill="#3d2c24" font-size="18" font-weight="bold" text-anchor="middle">≪</text>
           <text x="562" y="105" fill="#3d2c24" font-size="14" font-weight="bold" text-anchor="middle">入口</text>
 
@@ -663,8 +679,8 @@
           <text x="182" y="160" fill="#3d2c24" font-size="13" font-weight="bold" text-anchor="middle">センサー</text>
           <text x="182" y="177" fill="#3d2c24" font-size="13" font-weight="bold" text-anchor="middle">ベッド</text>
           
-          <!-- 1F トイレ ピクトグラム（背景 #FFFFFF） -->
-          <rect x="370" y="338" width="45" height="49" rx="3" fill="#FFFFFF" />
+          <!-- 1F トイレ ピクトグラム（背景 #faf7f4） -->
+          <rect x="370" y="338" width="45" height="49" rx="3" fill="#faf7f4" />
           <g fill="#004499">
             <circle cx="382" cy="347" r="3.2" />
             <rect x="377" y="351.5" width="10" height="14" rx="2" />
@@ -847,15 +863,15 @@
           <!-- EV -->
           <text x="457.5" y="314" fill="#3d2c24" font-size="16" font-weight="bold" text-anchor="middle">EV</text>
 
-          <!-- 喫煙所マーク -->
-          <rect x="201" y="338" width="40" height="40" fill="#FFFFFF" />
+          <!-- 喫煙所マーク（背景 #faf7f4） -->
+          <rect x="201" y="338" width="40" height="40" fill="#faf7f4" />
           <circle cx="221" cy="358" r="16" fill="none" stroke="#3a85c6" stroke-width="3" />
           <line x1="210" y1="369" x2="232" y2="347" stroke="#3a85c6" stroke-width="2.5" />
           <rect x="210" y="356" width="16" height="4" fill="#333" />
           <rect x="227" y="356" width="4" height="4" fill="#c94a38" />
 
-          <!-- 2F トイレ ピクトグラム（背景 #FFFFFF） -->
-          <rect x="370" y="386" width="44" height="48" rx="3" fill="#FFFFFF" />
+          <!-- 2F トイレ ピクトグラム（背景 #faf7f4） -->
+          <rect x="370" y="386" width="44" height="48" rx="3" fill="#faf7f4" />
           <g fill="#004499">
             <circle cx="381" cy="395" r="3.2" />
             <rect x="376" y="399.5" width="10" height="14" rx="2" />
@@ -933,7 +949,7 @@
             <div class="callout-company">パラマウントベッド</div>
             <p class="callout-desc">トイレの排泄を自動で記録し、スタッフの負担を軽減します。</p>
           </div>
-          <div class="callout bd-green tail-right cb-16">
+          <div class="callout bd-green tail-top cb-16">
             <label for="b2f-none" class="callout-close" aria-label="閉じる">×</label>
             <div class="callout-head"><span class="callout-badge c-green">16</span><span class="callout-title">福祉用具展示コーナー</span></div>
             <div class="callout-company">パラマウントケアサービス</div>
