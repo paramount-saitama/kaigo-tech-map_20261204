@@ -107,8 +107,8 @@
   .notice-accordion[open] summary::after {
     content: "－";
   }
-.notice-body {
-    padding: 12px 10px;   /* 左右の余白を 14px → 10px に変更（これで+8px） */
+  .notice-body {
+    padding: 12px 14px;
     background-color: #f8f4ef;
     border-top: 1px solid var(--border-soft);
   }
@@ -123,23 +123,23 @@
   .notice-item {
     display: flex;
     align-items: center;
-    gap: 8px;             /* アイコンとの隙間を 12px → 8px に変更（これで+4px） */
+    gap: 12px;
   }
   .notice-icon {
-    width: 36px;          /* アイコン枠も 40px → 36px に微調整（これで+4px） */
-    height: 36px;
+    width: 40px;
+    height: 40px;
     flex-shrink: 0;
     display: flex;
     align-items: center;
     justify-content: center;
   }
   .notice-icon svg {
-    width: 36px;
-    height: 36px;
+    width: 38px;
+    height: 38px;
     display: block;
   }
   .notice-text {
-    font-size: 0.68rem;
+    font-size: 0.70rem;
     line-height: 1.55;
     color: var(--ink-main);
     margin: 0;
@@ -671,7 +671,7 @@
               <circle cx="25" cy="20.5" r="1" fill="#3d2c24"/>
             </svg>
           </span>
-          <p class="notice-text">貴重品やお荷物は、ご自身での管理をお願いいたします。盗難・紛失について主催者側は一切の責任を負いかねます。</p>
+          <p class="notice-text">貴重品やお荷物は、ご自身で管理をお願いいたします。盗難・紛失について主催者側は一切の責任を負いかねます。</p>
         </li>
 
         <!-- 2. 駐車場（車） -->
@@ -701,7 +701,7 @@
               <line x1="10.5" y1="10.5" x2="29.5" y2="29.5" stroke="#d94e28" stroke-width="2.6"/>
             </svg>
           </span>
-          <p class="notice-text">建物内は禁煙です。喫煙（加熱式タバコを含む）の際は、2階展示会場前の喫煙専用室をご利用ください。</p>
+          <p class="notice-text">建物内は禁煙です。喫煙（加熱式タバコを含む）は、2階展示会場前の喫煙専用室をご利用ください。</p>
         </li>
 
         <!-- 4. 飲食持込禁止・ゴミ -->
@@ -715,7 +715,7 @@
               <line x1="10.5" y1="10.5" x2="29.5" y2="29.5" stroke="#d94e28" stroke-width="2.6"/>
             </svg>
           </span>
-          <p class="notice-text">飲食物の持込はご遠慮ください（蓋付の飲料は除く）。ゴミは指定のゴミ箱へ捨てるか、各自でお持ち帰りください。</p>
+          <p class="notice-text">飲食物の持込はご遠慮ください（蓋付の飲料は除く）。ゴミは指定のゴミ箱へ捨てるか、各自お持ち帰りください。</p>
         </li>
 
         <!-- 5. お静かに（音符に禁止線） -->
