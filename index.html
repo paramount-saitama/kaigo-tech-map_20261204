@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第2回 介護テクノロジー導入相談会 会場マップ（1F・2F）</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Shippori+Mincho:wght@600;700&family=Zen+Maru+Gothic:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-page: #ebe6e0;
+    --bg-card: #fffdfb;
+    --bg-soft: #f6efe9;
+    --ink-main: #3d2c24;
+    --ink-sub: #6b564c;
+    --accent-coral: #f07672;
+    --accent-coral-dark: #d95b57;
+    --accent-peach: #f5decb;
+    --accent-brown: #473329;
+    --border-soft: #dfd4ca;
+  }
+
+  body {
+    font-family: "Zen Maru Gothic", "Noto Sans JP", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+    margin: 0;
+    padding: 16px;
+    background-color: var(--bg-page);
+    color: var(--ink-main);
+  }
+
+  /* ページ最上部のヘッダーバナー */
+  .top-banner {
+    max-width: 600px;
+    margin: 0 auto 12px;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(61, 44, 36, 0.12);
+    background-color: var(--bg-card);
+    border: 1.5px solid var(--border-soft);
+  }
+  .top-banner img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .title-block {
+    max-width: 600px;
+    margin: 0 auto 14px;
+    text-align: center;
+  }
+  .event-kicker {
+    display: inline-block;
+    background-color: var(--accent-peach);
+    color: var(--ink-main);
+    font-size: 0.78rem;
+    font-weight: 700;
+    padding: 3px 12px;
+    border-radius: 999px;
+    margin-bottom: 6px;
+    letter-spacing: 0.04em;
+  }
+  h1 {
+    font-family: "Shippori Mincho", "Zen Maru Gothic", "Noto Sans JP", serif;
+    font-size: 1.28rem;
+    font-weight: 700;
+    text-align: center;
+    margin: 0;
+    color: var(--ink-main);
+    letter-spacing: 0.03em;
+  }
+
+  /* 制御用ラジオボタンは非表示 */
+  input[type="radio"] {
+    display: none;
+  }
+
+  /* タブボタン */
+  .tab-container {
+    max-width: 600px;
+    margin: 0 auto 12px;
+    display: flex;
+    gap: 10px;
+  }
+  .tab-label {
+    flex: 1;
+    padding: 11px 12px;
+    font-size: 1.02rem;
+    font-weight: 900;
+    text-align: center;
+    border: 2px solid var(--accent-coral);
+    background-color: var(--bg-card);
+    color: var(--accent-coral-dark);
+    border-radius: 12px;
+    cursor: pointer;
+    user-select: none;
+    box-shadow: 0 2px 6px rgba(61, 44, 36, 0.06);
+    transition: all 0.15s ease;
+  }
+  #tab-1f:checked ~ .tab-container label[for="tab-1f"],
+  #tab-2f:checked ~ .tab-container label[for="tab-2f"] {
+    background-color: var(--accent-coral);
+    border-color: var(--accent-coral);
+    color: #fff;
+    box-shadow: 0 3px 10px rgba(240, 118, 114, 0.35);
+  }
+
+  /* マップ枠 */
+  .map-container {
+    max-width: 600px;
+    margin: 0 auto;
+    background: var(--bg-card);
+    border: 1.5px solid var(--border-soft);
+    border-radius: 14px;
+    padding: 12px;
+    box-shadow: 0 4px 12px rgba(61, 44, 36, 0.08);
+    overflow: visible;
+  }
+  .floor-content {
+    display: none;
+  }
+  #tab-1f:checked ~ .map-container #floor-1f,
+  #tab-2f:checked ~ .map-container #floor-2f {
+    display: block;
+  }
+
+  .hint-text {
+    font-size: 0.8rem;
+    color: var(--ink-sub);
+    text-align: center;
+    margin-bottom: 8px;
+    background: var(--bg-soft);
+    padding: 5px 10px;
+    border-radius: 8px;
+  }
+
+  /* 図面とタップ領域を重ねるための親枠 */
+  .svg-wrapper {
+    position: relative;
+    width: 100%;
+    background: #faf7f4;
+    border-radius: 10px;
+    border: 1px solid #ede4dc;
+    overflow: visible;
+  }
+  svg.floor-svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* SVGの上に重ねる透明タップボタン */
+  .hit-area {
+    position: absolute;
+    cursor: pointer;
+    border-radius: 6px;
+    box-sizing: border-box;
+    transition: box-shadow 0.15s, background-color 0.15s;
+    z-index: 5;
+  }
+  .hit-area:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+
+  /* 選択されたブースの強調枠（1F: 1〜10） */
+  #b1:checked  ~ .map-container .hit-b1,
+  #b2:checked  ~ .map-container .hit-b2,
+  #b3:checked  ~ .map-container .hit-b3,
+  #b4:checked  ~ .map-container .hit-b4,
+  #b5:checked  ~ .map-container .hit-b5,
+  #b6:checked  ~ .map-container .hit-b6,
+  #b7:checked  ~ .map-container .hit-b7,
+  #b8:checked  ~ .map-container .hit-b8,
+  #b9:checked  ~ .map-container .hit-b9,
+  #b10:checked ~ .map-container .hit-b10,
+  /* 選択されたブースの強調枠（2F: 11〜16） */
+  #b11:checked ~ .map-container .hit-b11,
+  #b12:checked ~ .map-container .hit-b12,
+  #b13:checked ~ .map-container .hit-b13,
+  #b14:checked ~ .map-container .hit-b14,
+  #b15:checked ~ .map-container .hit-b15,
+  #b16:checked ~ .map-container .hit-b16 {
+    border: 2.5px solid var(--ink-main);
+    box-shadow: 0 0 0 2px #fff, 0 3px 8px rgba(61, 44, 36, 0.35);
+    z-index: 6;
+  }
+
+  /* 1F 1〜10の座標（viewBox 600x480） */
+  .hit-b1  { left: 36.33%; top: 5.83%;  width: 11.33%; height: 9.17%; }
+  .hit-b2  { left: 22.00%; top: 5.83%;  width: 11.33%; height: 9.17%; }
+  .hit-b3  { left: 6.33%;  top: 5.83%;  width: 11.33%; height: 9.17%; }
+  .hit-b4  { left: 6.33%;  top: 20.42%; width: 7.33%;  height: 13.75%; }
+  .hit-b5  { left: 6.33%;  top: 36.46%; width: 7.67%;  height: 27.50%; }
+  .hit-b6  { left: 10.33%; top: 68.75%; width: 16.00%; height: 10.83%; }
+  .hit-b7  { left: 25.33%; top: 45.00%; width: 11.33%; height: 9.17%; }
+  .hit-b8  { left: 25.33%; top: 56.25%; width: 11.33%; height: 9.17%; }
+  .hit-b9  { left: 10.33%; top: 85.00%; width: 11.33%; height: 9.17%; }
+  .hit-b10 { left: 70.67%; top: 19.17%; width: 7.67%;  height: 13.75%; }
+
+  /* 2F 11〜16の座標（viewBox 600x460） */
+  .hit-b11 { left: 31.00%; top: 48.26%; width: 12.00%; height: 10.43%; }
+  .hit-b12 { left: 14.33%; top: 48.26%; width: 12.00%; height: 10.43%; }
+  .hit-b13 { left: 14.33%; top: 26.52%; width: 8.33%;  height: 17.83%; }
+  .hit-b14 { left: 14.33%; top: 8.70%;  width: 12.00%; height: 10.43%; }
+  .hit-b15 { left: 29.33%; top: 8.70%;  width: 12.00%; height: 10.43%; }
+  .hit-b16 { left: 48.33%; top: 8.70%;  width: 8.33%;  height: 18.70%; }
+
+  /* ==================== マップ上の吹き出し（横長・スマホ最適化） ==================== */
+  .callout-layer {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 20;
+  }
+  .callout {
+    display: none;
+    position: absolute;
+    width: min(312px, 84vw);
+    background: var(--bg-card);
+    border: 2.5px solid var(--accent-coral);
+    border-radius: 12px;
+    padding: 9px 12px;
+    box-shadow: 0 8px 20px rgba(61, 44, 36, 0.22);
+    box-sizing: border-box;
+    pointer-events: auto;
+    animation: popIn 0.18s ease-out;
+  }
+  @keyframes popIn {
+    from { opacity: 0; transform: scale(0.94); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+
+  /* 吹き出し右上の閉じる「×」ボタン */
+  .callout-close {
+    position: absolute;
+    top: 6px;
+    right: 7px;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--bg-soft);
+    color: var(--ink-sub);
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 21px;
+    text-align: center;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.15s, color 0.15s;
+  }
+  .callout-close:hover {
+    background: var(--ink-main);
+    color: #fff;
+  }
+
+  /* カテゴリ色に合わせた枠線色 */
+  .callout.bd-orange { border-color: #d94e28; --bd-color: #d94e28; }
+  .callout.bd-purple { border-color: #6c72a4; --bd-color: #6c72a4; }
+  .callout.bd-pink   { border-color: #f07672; --bd-color: #f07672; }
+  .callout.bd-blue   { border-color: #1ba1e2; --bd-color: #1ba1e2; }
+  .callout.bd-yellow { border-color: #e6b800; --bd-color: #e6b800; }
+  .callout.bd-green  { border-color: #469b27; --bd-color: #469b27; }
+
+  /* 吹き出しの三角しっぽ */
+  .callout::before,
+  .callout::after {
+    content: "";
+    position: absolute;
+    border-style: solid;
+  }
+  .callout.tail-top::before {
+    top: -11px;
+    left: var(--tail-x, 50%);
+    margin-left: -9px;
+    border-width: 0 9px 11px 9px;
+    border-color: transparent transparent var(--bd-color, #f07672) transparent;
+  }
+  .callout.tail-top::after {
+    top: -7.5px;
+    left: var(--tail-x, 50%);
+    margin-left: -7px;
+    border-width: 0 7px 8px 7px;
+    border-color: transparent transparent #fffdfb transparent;
+  }
+  .callout.tail-bottom::before {
+    bottom: -11px;
+    left: var(--tail-x, 50%);
+    margin-left: -9px;
+    border-width: 11px 9px 0 9px;
+    border-color: var(--bd-color, #f07672) transparent transparent transparent;
+  }
+  .callout.tail-bottom::after {
+    bottom: -7.5px;
+    left: var(--tail-x, 50%);
+    margin-left: -7px;
+    border-width: 8px 7px 0 7px;
+    border-color: #fffdfb transparent transparent transparent;
+  }
+  .callout.tail-left::before {
+    left: -11px;
+    top: 18px;
+    border-width: 8px 11px 8px 0;
+    border-color: transparent var(--bd-color, #f07672) transparent transparent;
+  }
+  .callout.tail-left::after {
+    left: -7.5px;
+    top: 20px;
+    border-width: 6px 8px 6px 0;
+    border-color: transparent #fffdfb transparent transparent;
+  }
+  .callout.tail-right::before {
+    right: -11px;
+    top: 18px;
+    border-width: 8px 0 8px 11px;
+    border-color: transparent transparent transparent var(--bd-color, #f07672);
+  }
+  .callout.tail-right::after {
+    right: -7.5px;
+    top: 20px;
+    border-width: 6px 0 6px 8px;
+    border-color: transparent transparent transparent #fffdfb;
+  }
+
+  .callout-head {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding-right: 24px;
+    margin-bottom: 2px;
+  }
+  .callout-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    color: #fff;
+    font-weight: bold;
+    font-size: 0.78rem;
+    flex-shrink: 0;
+  }
+  .callout-title {
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--ink-main);
+    line-height: 1.25;
+  }
+  .callout-company {
+    font-size: 0.76rem;
+    font-weight: 700;
+    color: var(--ink-sub);
+    margin-bottom: 4px;
+  }
+  .callout-desc {
+    font-size: 0.78rem;
+    line-height: 1.45;
+    color: var(--ink-main);
+    margin: 0;
+  }
+
+  /* 1F 吹き出し配置 */
+  .cb-1  { left: 14%; top: 17.5%; --tail-x: 28%; }
+  .cb-2  { left: 6%;  top: 17.5%; --tail-x: 19%; }
+  .cb-3  { left: 3%;  top: 17.5%; --tail-x: 42px; }
+  .cb-4  { left: 15%; top: 19.5%; }
+  .cb-5  { left: 15%; top: 38%; }
+  .cb-6  { left: 4%;  bottom: 33.5%; --tail-x: 68px; }
+  .cb-7  { left: 38%; top: 43%; }
+  .cb-8  { left: 38%; top: 54%; }
+  .cb-9  { left: 4%;  bottom: 17%; --tail-x: 54px; }
+  .cb-10 { right: 31%; top: 18%; }
+
+  /* 2F 吹き出し配置 */
+  .cb-11 { left: 12%; bottom: 54%; --tail-x: 25%; }
+  .cb-12 { left: 4%;  bottom: 54%; --tail-x: 16%; }
+  .cb-13 { left: 24%; top: 27%; }
+  .cb-14 { left: 4%;  top: 21.5%; --tail-x: 16%; }
+  .cb-15 { left: 10%; top: 21.5%; --tail-x: 23%; }
+  .cb-16 { right: 53%; top: 10%; }
+
+  /* 選択された吹き出しを表示（1F） */
+  #b1:checked  ~ .map-container .cb-1,
+  #b2:checked  ~ .map-container .cb-2,
+  #b3:checked  ~ .map-container .cb-3,
+  #b4:checked  ~ .map-container .cb-4,
+  #b5:checked  ~ .map-container .cb-5,
+  #b6:checked  ~ .map-container .cb-6,
+  #b7:checked  ~ .map-container .cb-7,
+  #b8:checked  ~ .map-container .cb-8,
+  #b9:checked  ~ .map-container .cb-9,
+  #b10:checked ~ .map-container .cb-10,
+  /* 選択された吹き出しを表示（2F） */
+  #b11:checked ~ .map-container .cb-11,
+  #b12:checked ~ .map-container .cb-12,
+  #b13:checked ~ .map-container .cb-13,
+  #b14:checked ~ .map-container .cb-14,
+  #b15:checked ~ .map-container .cb-15,
+  #b16:checked ~ .map-container .cb-16 {
+    display: block;
+  }
+
+  /* 1F・2F共通 色凡例 */
+  .legend-box {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px dashed var(--border-soft);
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px 16px;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.84rem;
+    font-weight: 700;
+    color: var(--ink-main);
+  }
+  .legend-swatch {
+    width: 32px;
+    height: 17px;
+    flex-shrink: 0;
+    border-radius: 4px;
+  }
+  .s-orange { background-color: #d94e28; }
+  .s-purple { background-color: #6c72a4; }
+  .s-pink   { background-color: #f07672; }
+  .s-blue   { background-color: #1ba1e2; }
+  .s-yellow { background-color: #e6b800; }
+  .s-green  { background-color: #469b27; }
+
+  /* 下部詳細ボックス */
+  .detail-wrapper {
+    max-width: 600px;
+    margin: 14px auto 0;
+  }
+  .detail-card {
+    display: none;
+    background: var(--bg-card);
+    border: 1.5px solid var(--border-soft);
+    border-left: 6px solid var(--accent-coral);
+    padding: 14px 16px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(61, 44, 36, 0.08);
+  }
+
+  /* 1Fタブ選択時のみ1F詳細を表示 */
+  #tab-1f:checked ~ #b1:checked  ~ .detail-wrapper #d-b1,
+  #tab-1f:checked ~ #b2:checked  ~ .detail-wrapper #d-b2,
+  #tab-1f:checked ~ #b3:checked  ~ .detail-wrapper #d-b3,
+  #tab-1f:checked ~ #b4:checked  ~ .detail-wrapper #d-b4,
+  #tab-1f:checked ~ #b5:checked  ~ .detail-wrapper #d-b5,
+  #tab-1f:checked ~ #b6:checked  ~ .detail-wrapper #d-b6,
+  #tab-1f:checked ~ #b7:checked  ~ .detail-wrapper #d-b7,
+  #tab-1f:checked ~ #b8:checked  ~ .detail-wrapper #d-b8,
+  #tab-1f:checked ~ #b9:checked  ~ .detail-wrapper #d-b9,
+  #tab-1f:checked ~ #b10:checked ~ .detail-wrapper #d-b10 {
+    display: block;
+  }
+
+  /* 2Fタブ選択時のみ2F詳細を表示 */
+  #tab-2f:checked ~ #b11:checked ~ .detail-wrapper #d-b11,
+  #tab-2f:checked ~ #b12:checked ~ .detail-wrapper #d-b12,
+  #tab-2f:checked ~ #b13:checked ~ .detail-wrapper #d-b13,
+  #tab-2f:checked ~ #b14:checked ~ .detail-wrapper #d-b14,
+  #tab-2f:checked ~ #b15:checked ~ .detail-wrapper #d-b15,
+  #tab-2f:checked ~ #b16:checked ~ .detail-wrapper #d-b16 {
+    display: block;
+  }
+
+  .detail-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 6px;
+  }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    color: #fff;
+    font-weight: bold;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+  }
+  .c-orange { background-color: #d94e28; }
+  .c-purple { background-color: #6c72a4; }
+  .c-green  { background-color: #469b27; }
+  .c-pink   { background-color: #f07672; }
+  .c-blue   { background-color: #1ba1e2; }
+  .c-yellow { background-color: #e6b800; color: #222; }
+
+  .detail-title {
+    font-weight: 700;
+    font-size: 1.04rem;
+    color: var(--ink-main);
+  }
+  .detail-sub {
+    font-size: 0.85em;
+    font-weight: 500;
+    color: var(--ink-sub);
+  }
+  .detail-company {
+    display: inline-block;
+    font-size: 0.82rem;
+    font-weight: 700;
+    padding: 2px 10px;
+    border-radius: 999px;
+    margin-bottom: 6px;
+  }
+  .detail-company.t-orange { color: #d94e28; background-color: #fdf0ec; }
+  .detail-company.t-purple { color: #6c72a4; background-color: #f1f2f8; }
+  .detail-company.t-green  { color: #469b27; background-color: #eef7eb; }
+  .detail-company.t-pink   { color: #d95b57; background-color: #fff1f0; }
+  .detail-company.t-blue   { color: #1ba1e2; background-color: #eaf6fc; }
+  .detail-company.t-yellow { color: #9a7200; background-color: #fef9e3; }
+
+  .detail-desc {
+    font-size: 0.9rem;
+    line-height: 1.55;
+    color: var(--ink-main);
+    margin: 0;
+  }
+
+  /* 全ブース一覧リスト */
+  .list-container {
+    max-width: 600px;
+    margin: 16px auto 0;
+    background: var(--bg-card);
+    border: 1.5px solid var(--border-soft);
+    border-radius: 14px;
+    padding: 12px 16px;
+    box-shadow: 0 4px 12px rgba(61, 44, 36, 0.06);
+  }
+  .list-title {
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: var(--ink-main);
+    margin-bottom: 8px;
+    border-bottom: 1.5px solid var(--accent-peach);
+    padding-bottom: 5px;
+  }
+  .booth-list-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 6px;
+    border-bottom: 1px solid #f2eae2;
+    cursor: pointer;
+    font-size: 0.9rem;
+    border-radius: 6px;
+    transition: background-color 0.12s;
+  }
+  .booth-list-item:hover {
+    background-color: var(--bg-soft);
+  }
+  .booth-list-item:last-child {
+    border-bottom: none;
+  }
+  .list-product {
+    font-weight: 700;
+    color: var(--ink-main);
+  }
+  .list-company {
+    font-size: 0.8rem;
+    color: var(--ink-sub);
+    margin-left: 4px;
+  }
+
+  /* フロアに応じて一覧を切り替え */
+  #list-1f, #list-2f { display: none; }
+  #tab-1f:checked ~ #list-1f { display: block; }
+  #tab-2f:checked ~ #list-2f { display: block; }
+</style>
+</head>
+<body>
+
+  <!-- ページ最上部バナー -->
+  <div class="top-banner">
+    <img src="banner.png" alt="第2回 介護テクノロジー導入相談会 イメージ">
+  </div>
+
+  <div class="title-block">
+    <div class="event-kicker">2026.12.4（金）パラマウントベッド さいたま支店</div>
+    <h1>介護テクノロジー導入相談会 会場マップ</h1>
+  </div>
+
+  <!-- フロア切り替え状態 -->
+  <input type="radio" name="floor" id="tab-1f" checked>
+  <input type="radio" name="floor" id="tab-2f">
+
+  <!-- 1Fブース選択状態（初期は未選択・閉じる用） -->
+  <input type="radio" name="booth1f" id="b1f-none" checked>
+  <input type="radio" name="booth1f" id="b1">
+  <input type="radio" name="booth1f" id="b2">
+  <input type="radio" name="booth1f" id="b3">
+  <input type="radio" name="booth1f" id="b4">
+  <input type="radio" name="booth1f" id="b5">
+  <input type="radio" name="booth1f" id="b6">
+  <input type="radio" name="booth1f" id="b7">
+  <input type="radio" name="booth1f" id="b8">
+  <input type="radio" name="booth1f" id="b9">
+  <input type="radio" name="booth1f" id="b10">
+
+  <!-- 2Fブース選択状態（初期は未選択・閉じる用） -->
+  <input type="radio" name="booth2f" id="b2f-none" checked>
+  <input type="radio" name="booth2f" id="b11">
+  <input type="radio" name="booth2f" id="b12">
+  <input type="radio" name="booth2f" id="b13">
+  <input type="radio" name="booth2f" id="b14">
+  <input type="radio" name="booth2f" id="b15">
+  <input type="radio" name="booth2f" id="b16">
+
+  <!-- タブボタン -->
+  <div class="tab-container">
+    <label for="tab-1f" class="tab-label">1F</label>
+    <label for="tab-2f" class="tab-label">2F</label>
+  </div>
+
+  <div class="map-container">
+    
+    <!-- ==================== 1階 ==================== -->
+    <div id="floor-1f" class="floor-content">
+      <div class="hint-text">※マップ内の番号をタップすると吹き出しで展示内容が表示されます</div>
+      
+      <div class="svg-wrapper">
+        <svg class="floor-svg" viewBox="0 0 600 480">
+          <!-- 外壁・間仕切り線 -->
+          <g stroke="#3d2c24" stroke-width="2.5" fill="none" stroke-linecap="square">
+            <polyline points="300,68 300,15 20,15 20,465 300,465 300,125" />
+            <polyline points="300,15 550,15 550,75" />
+            <polyline points="550,125 550,305 360,305 360,465" />
+            <polyline points="300,165 470,165 470,250 300,250" />
+            <rect x="405" y="165" width="65" height="65" />
+            <line x1="225" y1="120" x2="225" y2="210" />
+            <rect x="195" y="325" width="48" height="68" />
+            <line x1="243" y1="325" x2="195" y2="393" />
+            <line x1="20" y1="393" x2="195" y2="393" />
+            <rect x="360" y="325" width="65" height="75" stroke-width="2" />
+          </g>
+
+          <!-- 扉・開口部アクセント -->
+          <rect x="297.5" y="275" width="5" height="32" fill="#3d2c24" />
+          <rect x="467.5" y="180" width="5" height="28" fill="#3d2c24" />
+
+          <!-- 受付 -->
+          <ellipse cx="505" cy="50" rx="38" ry="26" fill="#5c473d" />
+          <text x="505" y="46" fill="#fff" font-size="14" font-weight="bold" text-anchor="middle">受</text>
+          <text x="505" y="64" fill="#fff" font-size="14" font-weight="bold" text-anchor="middle">付</text>
+
+          <!-- 入口 -->
+          <rect x="518" y="75" width="62" height="52" fill="#f5decb" />
+          <text x="530" y="106" fill="#3d2c24" font-size="18" font-weight="bold" text-anchor="middle">≪</text>
+          <text x="562" y="105" fill="#3d2c24" font-size="14" font-weight="bold" text-anchor="middle">入口</text>
+
+          <!-- EV・センサーベッド表示 -->
+          <text x="437" y="205" fill="#3d2c24" font-size="18" font-weight="bold" text-anchor="middle">EV</text>
+          <text x="182" y="160" fill="#3d2c24" font-size="13" font-weight="bold" text-anchor="middle">センサー</text>
+          <text x="182" y="177" fill="#3d2c24" font-size="13" font-weight="bold" text-anchor="middle">ベッド</text>
+          
+          <!-- 1F トイレ ピクトグラム（背景 #FFFFFF） -->
+          <rect x="370" y="338" width="45" height="49" rx="3" fill="#FFFFFF" />
+          <g fill="#004499">
+            <circle cx="382" cy="347" r="3.2" />
+            <rect x="377" y="351.5" width="10" height="14" rx="2" />
+            <rect x="379.5" y="364" width="5" height="17" rx="1.5" />
+          </g>
+          <g fill="#ee2211">
+            <circle cx="403" cy="347" r="3.2" />
+            <path d="M 399,351.5 L 407,351.5 L 410,362 L 407.5,362.5 L 405.5,355 L 405,360 L 408.5,371 L 397.5,371 L 401,360 L 400.5,355 L 398.5,362.5 L 396,362 Z" />
+            <rect x="401" y="370" width="4" height="11" rx="1.5" />
+          </g>
+
+          <!-- 1F ブース 1〜10 -->
+          <rect x="218" y="28" width="68" height="44" rx="4" fill="#d94e28" />
+          <circle cx="252" cy="50" r="15" fill="#fff" />
+          <text x="252" y="57" fill="#d94e28" font-size="20" font-weight="bold" text-anchor="middle">1</text>
+
+          <rect x="132" y="28" width="68" height="44" rx="4" fill="#d94e28" />
+          <circle cx="166" cy="50" r="15" fill="#fff" />
+          <text x="166" y="57" fill="#d94e28" font-size="20" font-weight="bold" text-anchor="middle">2</text>
+
+          <rect x="38" y="28" width="68" height="44" rx="4" fill="#6c72a4" />
+          <circle cx="72" cy="50" r="15" fill="#fff" />
+          <text x="72" y="57" fill="#6c72a4" font-size="20" font-weight="bold" text-anchor="middle">3</text>
+
+          <rect x="38" y="98" width="44" height="66" rx="4" fill="#d94e28" />
+          <circle cx="60" cy="131" r="15" fill="#fff" />
+          <text x="60" y="138" fill="#d94e28" font-size="20" font-weight="bold" text-anchor="middle">4</text>
+
+          <rect x="38" y="175" width="46" height="132" rx="4" fill="#f07672" />
+          <circle cx="61" cy="241" r="15" fill="#fff" />
+          <text x="61" y="248" fill="#d94e28" font-size="20" font-weight="bold" text-anchor="middle">5</text>
+
+          <rect x="62" y="330" width="96" height="52" rx="4" fill="#469b27" />
+          <circle cx="110" cy="356" r="15" fill="#fff" />
+          <text x="110" y="363" fill="#469b27" font-size="20" font-weight="bold" text-anchor="middle">6</text>
+
+          <rect x="152" y="216" width="68" height="44" rx="4" fill="#469b27" />
+          <circle cx="186" cy="238" r="15" fill="#fff" />
+          <text x="186" y="245" fill="#469b27" font-size="20" font-weight="bold" text-anchor="middle">7</text>
+
+          <rect x="152" y="270" width="68" height="44" rx="4" fill="#d94e28" />
+          <circle cx="186" cy="292" r="15" fill="#fff" />
+          <text x="186" y="299" fill="#d94e28" font-size="20" font-weight="bold" text-anchor="middle">8</text>
+
+          <rect x="62" y="408" width="68" height="44" rx="4" fill="#1ba1e2" />
+          <circle cx="96" cy="430" r="15" fill="#fff" />
+          <text x="96" y="437" fill="#1ba1e2" font-size="20" font-weight="bold" text-anchor="middle">9</text>
+
+          <rect x="424" y="92" width="46" height="66" rx="4" fill="#469b27" />
+          <circle cx="447" cy="125" r="15" fill="#fff" />
+          <text x="447" y="132" fill="#469b27" font-size="18" font-weight="bold" text-anchor="middle">10</text>
+        </svg>
+
+        <!-- 1F 透明タップボタン -->
+        <label for="b1" class="hit-area hit-b1" aria-label="1番ブース"></label>
+        <label for="b2" class="hit-area hit-b2" aria-label="2番ブース"></label>
+        <label for="b3" class="hit-area hit-b3" aria-label="3番ブース"></label>
+        <label for="b4" class="hit-area hit-b4" aria-label="4番ブース"></label>
+        <label for="b5" class="hit-area hit-b5" aria-label="5番ブース"></label>
+        <label for="b6" class="hit-area hit-b6" aria-label="6番ブース"></label>
+        <label for="b7" class="hit-area hit-b7" aria-label="7番ブース"></label>
+        <label for="b8" class="hit-area hit-b8" aria-label="8番ブース"></label>
+        <label for="b9" class="hit-area hit-b9" aria-label="9番ブース"></label>
+        <label for="b10" class="hit-area hit-b10" aria-label="10番ブース"></label>
+
+        <!-- 1F マップ上の吹き出し（1〜10） -->
+        <div class="callout-layer">
+          <div class="callout bd-orange tail-top cb-1">
+            <label for="b1f-none" class="callout-close" aria-label="閉じる">×</label>
+            <div class="callout-head"><span class="callout-badge c-orange">1</span><span class="callout-title">クリアトークカム</span></div>
+            <div class="callout-company">ティービーアイ</div>
+            <p class="callout-desc">スタッフ間の情報共有をスムーズにするインカム・コミュニケーションツールです。</p>
+          </div>
+          <div class="callout bd-orange tail-top cb-2">
+            <label for="b1f-none" class="callout-close" aria-label="閉じる">×</label>
+            <div class="callout-head"><span class="callout-badge c-orange">2</span><span class="callout-title">CARE KARTE</span></div>
+            <div class="callout-company">ケアコネクトジャパン</div>
+            <p class="callout-desc">介護記録・請求業務を一元化し、見守り機器等ともデータ連携できる介護記録システムです。</p>
+          </div>
+          <div class="callout bd-purple tail-top cb-3">
+            <label for="b1f-none" class="callout-close" aria-label="閉じる">×</label>
+            <div class="callout-head"><span class="callout-badge c-purple">3</span><span class="callout-title">SOELシリーズ</span></div>
+            <div class="callout-company">マツオメディカル</div>
+            <p class="callout-desc">現場の介護業務やケアの質向上をサポートする製品シリーズです。</p>
+          </div>
+          <div class="callout bd-orange tail-left cb-4">
+            <label for="b1f-none" class="callout-close" aria-label="閉じる">×</label>
+            <div class="callout-head"><span class="callout-badge c-orange">4</span><span class="callout-title">ココヘルパ</span></div>
+            <div class="callout-company">ジーコム</div>
+            <p class="callout-desc">スマートフォン連動型のナースコール・見守りシステムです。</p>
+          </div>
+          <div class="callout bd-pink tail-left cb-5">
+            <label for="b1f-none" class="callout-close" aria-label="閉じる">×</label>
+            <div class="callout-head"><span class="callout-badge c-pink">5</span><span class="callout-title">眠りCONNECT</span></div>
+            <div class="callout-company">パラマウントベッド</div>
+            <p class="callout-desc">見守り支援システム「眠りSCAN」と各種機器・記録ソフトをつなぎ、介護現場のDXを実現します。</p>
+          </div>
+          <div class="callout bd-green tail-bottom cb-6">
+            <label for="b1f-none" class="callout-close" aria-label="閉じる">×</label>
+            <div class="callout-head"><span class="callout-badge c-green">6</span><span class="callout-title">木製家具</span></div>
+            <div class="callout-company">紅中</div>
+            <p class="callout-desc">介護施設向けの木製家具を展示しています。居室や用途に合わせた特注家具の製作が可能です。</p>
+          </div>
+          <div class="callout bd-green tail-left cb-7">
+            <label for="b1f-none" class="callout-close" aria-label="閉じる">×</label>
+            <div class="callout-head"><span class="callout-badge c-green">7</span><span class="callout-title">ネットワーク構築・保守</span></div>
+            <div class="callout-company">RECTO（レクト）</div>
+            <p class="callout-desc">介護テクノロジーの安定稼働に不可欠な施設内Wi-Fi・ネットワーク環境の構築と保守をご提案します。</p>
+          </div>
+          <div class="callout bd-orange tail-left cb-8">
+            <label for="b1f-none" class="callout-close" aria-label="閉じる">×</label>
+            <div class="callout-head"><span class="callout-badge c-orange">8</span><span class="callout-title">VOYT</span></div>
+            <div class="callout-company">ボイット</div>
+            <p class="callout-desc">音声入力・文字起こし機能を備えた次世代のスマホインカムアプリです。</p>
+          </div>
+          <div class="callout bd-blue tail-bottom cb-9">
+            <label for="b1f-none" class="callout-close" aria-label="閉じる">×</label>
+            <div class="callout-head"><span class="callout-badge c-blue">9</span><span class="callout-title">シャワー式介護入浴機器</span></div>
+            <div class="callout-company">パラマウントベッド</div>
+            <p class="callout-desc">ご入居者の負担軽減とスタッフの入浴介助の省力化を両立するシャワー式入浴機器です。</p>
+          </div>
+          <div class="callout bd-green tail-right cb-10">
+            <label for="b1f-none" class="callout-close" aria-label="閉じる">×</label>
+            <div class="callout-head"><span class="callout-badge c-green">10</span><span class="callout-title">Sleephoria（スリーフォリア）</span></div>
+            <div class="callout-company">パラマウントウェルネス</div>
+            <p class="callout-desc">睡眠の質を高め、健やかな毎日をサポートする睡眠ソリューションです。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== 2階 ==================== -->
+    <div id="floor-2f" class="floor-content">
+      <div class="hint-text">※マップ内の番号をタップすると吹き出しで展示内容が表示されます</div>
+
+      <div class="svg-wrapper">
+        <svg class="floor-svg" viewBox="0 0 600 460">
+          <!-- 外壁・間仕切り線 -->
+          <g stroke="#3d2c24" stroke-width="2.5" fill="none" stroke-linecap="square">
+            <polyline points="240,285 68,285 68,15 360,15 360,285 288,285" />
+            <polyline points="360,15 480,15 480,285 360,285" />
+            <rect x="480" y="15" width="102" height="135" />
+            <polyline points="525,150 525,366 402,366 402,332" />
+            <rect x="435" y="285" width="45" height="47" />
+            <polyline points="72,332 342,332 342,445" />
+            <rect x="195" y="332" width="52" height="52" />
+            <polyline points="366,445 366,332 402,332" />
+            <rect x="366" y="382" width="52" height="56" />
+          </g>
+
+          <!-- 扉・開口部の太線アクセント -->
+          <rect x="242" y="281.5" width="44" height="7" fill="#3d2c24" />
+          <rect x="377" y="281.5" width="32" height="7" fill="#3d2c24" />
+          <rect x="476.5" y="228" width="7" height="28" fill="#3d2c24" />
+          <rect x="476.5" y="296" width="7" height="24" fill="#3d2c24" />
+
+          <!-- 相談ブース① -->
+          <text x="420" y="38" fill="#3d2c24" font-size="13" font-weight="bold" text-anchor="middle">相談ブース</text>
+          <text x="420" y="53" fill="#3d2c24" font-size="13" font-weight="bold" text-anchor="middle">①</text>
+          <rect x="394" y="76" width="52" height="24" rx="4" fill="#b5b5b5" />
+          <circle cx="404" cy="65" r="5.5" fill="#2c5985" />
+          <circle cx="436" cy="65" r="5.5" fill="#2c5985" />
+          <circle cx="404" cy="111" r="5.5" fill="#2c5985" />
+          <circle cx="436" cy="111" r="5.5" fill="#2c5985" />
+
+          <!-- 相談ブース② -->
+          <polyline points="468,142 392,142 392,240" stroke="#999" stroke-width="4.5" fill="none" />
+          <rect x="404" y="178" width="52" height="24" rx="4" fill="#b5b5b5" />
+          <circle cx="414" cy="167" r="5.5" fill="#2c5985" />
+          <circle cx="446" cy="167" r="5.5" fill="#2c5985" />
+          <circle cx="414" cy="213" r="5.5" fill="#2c5985" />
+          <circle cx="446" cy="213" r="5.5" fill="#2c5985" />
+          <text x="430" y="242" fill="#3d2c24" font-size="13" font-weight="bold" text-anchor="middle">相談ブース</text>
+          <text x="430" y="257" fill="#3d2c24" font-size="13" font-weight="bold" text-anchor="middle">②</text>
+
+          <!-- 出展スタッフ休憩室 -->
+          <text x="531" y="102" fill="#3d2c24" font-size="13.5" font-weight="bold" text-anchor="middle">出展スタッフ</text>
+          <text x="531" y="121" fill="#3d2c24" font-size="13.5" font-weight="bold" text-anchor="middle">休憩室</text>
+
+          <!-- EV -->
+          <text x="457.5" y="314" fill="#3d2c24" font-size="16" font-weight="bold" text-anchor="middle">EV</text>
+
+          <!-- 喫煙所マーク -->
+          <rect x="201" y="338" width="40" height="40" fill="#FFFFFF" />
+          <circle cx="221" cy="358" r="16" fill="none" stroke="#3a85c6" stroke-width="3" />
+          <line x1="210" y1="369" x2="232" y2="347" stroke="#3a85c6" stroke-width="2.5" />
+          <rect x="210" y="356" width="16" height="4" fill="#333" />
+          <rect x="227" y="356" width="4" height="4" fill="#c94a38" />
+
+          <!-- 2F トイレ ピクトグラム（背景 #FFFFFF） -->
+          <rect x="370" y="386" width="44" height="48" rx="3" fill="#FFFFFF" />
+          <g fill="#004499">
+            <circle cx="381" cy="395" r="3.2" />
+            <rect x="376" y="399.5" width="10" height="14" rx="2" />
+            <rect x="378.5" y="412" width="5" height="17" rx="1.5" />
+          </g>
+          <g fill="#ee2211">
+            <circle cx="402" cy="395" r="3.2" />
+            <path d="M 398,399.5 L 406,399.5 L 409,410 L 406.5,410.5 L 404.5,403 L 404,408 L 407.5,419 L 396.5,419 L 400,408 L 399.5,403 L 397.5,410.5 L 395,410 Z" />
+            <rect x="400" y="418" width="4" height="11" rx="1.5" />
+          </g>
+
+          <!-- 2F ブース 11〜16 -->
+          <rect x="86" y="40" width="72" height="48" rx="4" fill="#f2ca19" />
+          <circle cx="122" cy="64" r="16" fill="#fff" />
+          <text x="122" y="71" fill="#d4a800" font-size="18" font-weight="bold" text-anchor="middle">14</text>
+
+          <rect x="176" y="40" width="72" height="48" rx="4" fill="#f2ca19" />
+          <circle cx="212" cy="64" r="16" fill="#fff" />
+          <text x="212" y="71" fill="#d4a800" font-size="18" font-weight="bold" text-anchor="middle">15</text>
+
+          <rect x="290" y="40" width="50" height="86" rx="4" fill="#469b27" />
+          <circle cx="315" cy="83" r="16" fill="#fff" />
+          <text x="315" y="90" fill="#469b27" font-size="18" font-weight="bold" text-anchor="middle">16</text>
+
+          <rect x="86" y="122" width="50" height="82" rx="4" fill="#f2ca19" />
+          <circle cx="111" cy="163" r="16" fill="#fff" />
+          <text x="111" y="170" fill="#d4a800" font-size="18" font-weight="bold" text-anchor="middle">13</text>
+
+          <rect x="86" y="222" width="72" height="48" rx="4" fill="#f2ca19" />
+          <circle cx="122" cy="246" r="16" fill="#fff" />
+          <text x="122" y="253" fill="#d4a800" font-size="18" font-weight="bold" text-anchor="middle">12</text>
+
+          <rect x="186" y="222" width="72" height="48" rx="4" fill="#469b27" />
+          <circle cx="222" cy="246" r="16" fill="#fff" />
+          <text x="222" y="253" fill="#469b27" font-size="18" font-weight="bold" text-anchor="middle">11</text>
+        </svg>
+
+        <!-- 2F 透明タップボタン（11〜16） -->
+        <label for="b11" class="hit-area hit-b11" aria-label="11番ブース"></label>
+        <label for="b12" class="hit-area hit-b12" aria-label="12番ブース"></label>
+        <label for="b13" class="hit-area hit-b13" aria-label="13番ブース"></label>
+        <label for="b14" class="hit-area hit-b14" aria-label="14番ブース"></label>
+        <label for="b15" class="hit-area hit-b15" aria-label="15番ブース"></label>
+        <label for="b16" class="hit-area hit-b16" aria-label="16番ブース"></label>
+
+        <!-- 2F マップ上の吹き出し（11〜16） -->
+        <div class="callout-layer">
+          <div class="callout bd-green tail-bottom cb-11">
+            <label for="b2f-none" class="callout-close" aria-label="閉じる">×</label>
+            <div class="callout-head"><span class="callout-badge c-green">11</span><span class="callout-title">PB-Method【オンライン】</span></div>
+            <div class="callout-company">パラマウントベッド</div>
+            <p class="callout-desc">眠りSCANをより有効に活用していただけるように専用スタッフがサポートします。</p>
+          </div>
+          <div class="callout bd-yellow tail-bottom cb-12">
+            <label for="b2f-none" class="callout-close" aria-label="閉じる">×</label>
+            <div class="callout-head"><span class="callout-badge c-yellow">12</span><span class="callout-title">おむつナビ</span></div>
+            <div class="callout-company">光洋</div>
+            <p class="callout-desc">専用パットにセンサーを装着し、今まで見えなかったおむつの中を見える化します。</p>
+          </div>
+          <div class="callout bd-yellow tail-left cb-13">
+            <label for="b2f-none" class="callout-close" aria-label="閉じる">×</label>
+            <div class="callout-head"><span class="callout-badge c-yellow">13</span><span class="callout-title">Dfree Professional</span></div>
+            <div class="callout-company">Dfree</div>
+            <p class="callout-desc">DFreeが、尿のたまり具合を見える化しトイレの失敗を防ぎます。</p>
+          </div>
+          <div class="callout bd-yellow tail-top cb-14">
+            <label for="b2f-none" class="callout-close" aria-label="閉じる">×</label>
+            <div class="callout-head"><span class="callout-badge c-yellow">14</span><span class="callout-title">おむつCOLOR</span></div>
+            <div class="callout-company">パラマウントベッド</div>
+            <p class="callout-desc">センサーが排便を検知するとスマホに通知。交換タイミングの把握に役立ちます。</p>
+          </div>
+          <div class="callout bd-yellow tail-top cb-15">
+            <label for="b2f-none" class="callout-close" aria-label="閉じる">×</label>
+            <div class="callout-head"><span class="callout-badge c-yellow">15</span><span class="callout-title">トイレDIARY</span></div>
+            <div class="callout-company">パラマウントベッド</div>
+            <p class="callout-desc">トイレの排泄を自動で記録し、スタッフの負担を軽減します。</p>
+          </div>
+          <div class="callout bd-green tail-right cb-16">
+            <label for="b2f-none" class="callout-close" aria-label="閉じる">×</label>
+            <div class="callout-head"><span class="callout-badge c-green">16</span><span class="callout-title">福祉用具展示コーナー</span></div>
+            <div class="callout-company">パラマウントケアサービス</div>
+            <p class="callout-desc">介護現場やご自宅での生活を支える各種福祉用具を体験いただけます。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== 1F・2F共通 色凡例 ==================== -->
+    <div class="legend-box" aria-label="ブースカラー凡例">
+      <div class="legend-item"><span class="legend-swatch s-orange"></span><span>介護業務支援</span></div>
+      <div class="legend-item"><span class="legend-swatch s-purple"></span><span>移乗支援（非装着）</span></div>
+      <div class="legend-item"><span class="legend-swatch s-pink"></span><span>見守り・コミュニケーション</span></div>
+      <div class="legend-item"><span class="legend-swatch s-blue"></span><span>入浴支援</span></div>
+      <div class="legend-item"><span class="legend-swatch s-yellow"></span><span>排泄支援（排泄予測・検知）</span></div>
+      <div class="legend-item"><span class="legend-swatch s-green"></span><span>その他</span></div>
+    </div>
+
+  </div>
+
+  <!-- ==================== 番号に連動する詳細表示エリア ==================== -->
+  <div class="detail-wrapper">
+    <!-- 1F 詳細カード（1〜10） -->
+    <div class="detail-card" id="d-b1">
+      <div class="detail-header"><span class="badge c-orange">1</span><span class="detail-title">クリアトークカム <span class="detail-sub"> ティービーアイ</span></span></div>
+      <div class="detail-company t-orange">介護業務支援</div>
+      <p class="detail-desc">スタッフ間の情報共有をスムーズにするインカム・コミュニケーションツールです。</p>
+    </div>
+    <div class="detail-card" id="d-b2">
+      <div class="detail-header"><span class="badge c-orange">2</span><span class="detail-title">CARE KARTE（ケアカルテ） <span class="detail-sub"> ケアコネクトジャパン</span></span></div>
+      <div class="detail-company t-orange">介護業務支援</div>
+      <p class="detail-desc">介護記録・請求業務を一元化し、見守り機器等ともデータ連携できる介護記録システムです。</p>
+    </div>
+    <div class="detail-card" id="d-b3">
+      <div class="detail-header"><span class="badge c-purple">3</span><span class="detail-title">SOELシリーズ <span class="detail-sub"> マツオメディカル</span></span></div>
+      <div class="detail-company t-purple">移乗支援（非装着）</div>
+      <p class="detail-desc">現場の介護業務やケアの質向上をサポートする製品シリーズです。</p>
+    </div>
+    <div class="detail-card" id="d-b4">
+      <div class="detail-header"><span class="badge c-orange">4</span><span class="detail-title">ココヘルパ <span class="detail-sub"> ジーコム</span></span></div>
+      <div class="detail-company t-orange">介護業務支援</div>
+      <p class="detail-desc">スマートフォン連動型のナースコール・見守りシステムです。</p>
+    </div>
+    <div class="detail-card" id="d-b5">
+      <div class="detail-header"><span class="badge c-pink">5</span><span class="detail-title">眠りCONNECT <span class="detail-sub"> パラマウントベッド</span></span></div>
+      <div class="detail-company t-pink">見守り・コミュニケーション</div>
+      <p class="detail-desc">見守り支援システム「眠りSCAN」と各種機器・記録ソフトをつなぎ、介護現場のDXを実現します。</p>
+    </div>
+    <div class="detail-card" id="d-b6">
+      <div class="detail-header"><span class="badge c-green">6</span><span class="detail-title">木製家具 <span class="detail-sub"> 紅中</span></span></div>
+      <div class="detail-company t-green">その他</div>
+      <p class="detail-desc">介護施設向けの木製家具を展示しています。<br>
+居室や用途に合わせた特注家具の製作が可能です。</p>
+    </div>
+    <div class="detail-card" id="d-b7">
+      <div class="detail-header"><span class="badge c-green">7</span><span class="detail-title">ネットワーク構築・保守 <span class="detail-sub"> RECTO（レクト）</span></span></div>
+      <div class="detail-company t-green">その他</div>
+      <p class="detail-desc">介護テクノロジーの安定稼働に不可欠な施設内Wi-Fi・ネットワーク環境の構築と保守をご提案します。</p>
+    </div>
+    <div class="detail-card" id="d-b8">
+      <div class="detail-header"><span class="badge c-orange">8</span><span class="detail-title">VOYT <span class="detail-sub"> ボイット</span></span></div>
+      <div class="detail-company t-orange">介護業務支援</div>
+      <p class="detail-desc">音声入力・文字起こし機能を備えた次世代のスマホインカムアプリです。</p>
+    </div>
+    <div class="detail-card" id="d-b9">
+      <div class="detail-header"><span class="badge c-blue">9</span><span class="detail-title">シャワー式介護入浴機器 <span class="detail-sub"> パラマウントベッド</span></span></div>
+      <div class="detail-company t-blue">入浴支援</div>
+      <p class="detail-desc">ご入居者の負担軽減とスタッフの入浴介助の省力化を両立するシャワー式入浴機器です。</p>
+    </div>
+    <div class="detail-card" id="d-b10">
+      <div class="detail-header"><span class="badge c-green">10</span><span class="detail-title">Sleephoria（スリーフォリア） <span class="detail-sub"> パラマウントウェルネス</span></span></div>
+      <div class="detail-company t-green">その他</div>
+      <p class="detail-desc">睡眠の質を高め、健やかな毎日をサポートする睡眠ソリューションです。</p>
+    </div>
+
+    <!-- 2F 詳細カード（11〜16） -->
+    <div class="detail-card" id="d-b11">
+      <div class="detail-header"><span class="badge c-green">11</span><span class="detail-title">PB-Method <span class="detail-sub"> パラマウントベッド</span></span></div>
+      <div class="detail-company t-green">その他</div>
+      <p class="detail-desc">眠りSCANをより有効に活用していただけるように専用スタッフがサポートします。<br>【オンライン】</p>
+    </div>
+    <div class="detail-card" id="d-b12">
+      <div class="detail-header"><span class="badge c-yellow">12</span><span class="detail-title">おむつナビ <span class="detail-sub"> 光洋</span></span></div>
+      <div class="detail-company t-yellow">排泄支援（排泄予測・検知）</div>
+      <p class="detail-desc">専用パットにセンサーを装着し、今まで見えなかったおむつの中を見える化します。<br>
+利用者一人一人に沿った排泄ケアと、職員の負担軽減を実現します。</p>
+    </div>
+    <div class="detail-card" id="d-b13">
+      <div class="detail-header"><span class="badge c-yellow">13</span><span class="detail-title">Dfree Professional <span class="detail-sub"> Dfree</span></span></div>
+      <div class="detail-company t-yellow">排泄支援（排泄予測・検知）</div>
+      <p class="detail-desc">DFreeが、尿のたまり具合を見える化しトイレの失敗を防ぎます。</p>
+    </div>
+    <div class="detail-card" id="d-b14">
+      <div class="detail-header"><span class="badge c-yellow">14</span><span class="detail-title">おむつCOLOR <span class="detail-sub"> パラマウントベッド</span></span></div>
+      <div class="detail-company t-yellow">排泄支援（排泄予測・検知）</div>
+      <p class="detail-desc">紙おむつに取り付けたセンサーが排便を検知すると、スタッフのスマホなどに通知。<br>
+排便の早期発見をサポートし、おむつ交換のタイミング把握に役立ちます。</p>
+    </div>
+    <div class="detail-card" id="d-b15">
+      <div class="detail-header"><span class="badge c-yellow">15</span><span class="detail-title">トイレDIARY <span class="detail-sub"> パラマウントベッド</span></span></div>
+      <div class="detail-company t-yellow">排泄支援（排泄予測・検知）</div>
+      <p class="detail-desc">トイレの排泄を自動で記録し、スタッフの負担を軽減します。</p>
+    </div>
+    <div class="detail-card" id="d-b16">
+      <div class="detail-header"><span class="badge c-green">16</span><span class="detail-title">福祉用具展示コーナー <span class="detail-sub"> パラマウントケアサービス</span></span></div>
+      <div class="detail-company t-green">その他</div>
+      <p class="detail-desc">介護現場やご自宅での生活を支える各種福祉用具を体験いただけます。</p>
+    </div>
+  </div>
+
+  <!-- ==================== 1階 全ブース一覧（1〜10） ==================== -->
+  <div class="list-container" id="list-1f">
+    <div class="list-title">1階 出展一覧（タップで詳細表示）</div>
+    <label for="b1" class="booth-list-item"><span class="badge c-orange">1</span><div><span class="list-product">クリアトークカム</span><span class="list-company">（ティービーアイ）</span></div></label>
+    <label for="b2" class="booth-list-item"><span class="badge c-orange">2</span><div><span class="list-product">CARE KARTE</span><span class="list-company">（ケアコネクトジャパン）</span></div></label>
+    <label for="b3" class="booth-list-item"><span class="badge c-purple">3</span><div><span class="list-product">SOELシリーズ</span><span class="list-company">（マツオメディカル）</span></div></label>
+    <label for="b4" class="booth-list-item"><span class="badge c-orange">4</span><div><span class="list-product">ココヘルパ</span><span class="list-company">（ジーコム）</span></div></label>
+    <label for="b5" class="booth-list-item"><span class="badge c-pink">5</span><div><span class="list-product">眠りCONNECT</span><span class="list-company">（パラマウントベッド）</span></div></label>
+    <label for="b6" class="booth-list-item"><span class="badge c-green">6</span><div><span class="list-product">木製家具</span><span class="list-company">（紅中）</span></div></label>
+    <label for="b7" class="booth-list-item"><span class="badge c-green">7</span><div><span class="list-product">ネットワーク構築</span><span class="list-company">（レクト）</span></div></label>
+    <label for="b8" class="booth-list-item"><span class="badge c-orange">8</span><div><span class="list-product">VOYT</span><span class="list-company">（ボイット）</span></div></label>
+    <label for="b9" class="booth-list-item"><span class="badge c-blue">9</span><div><span class="list-product">シャワー式介護入浴機器</span><span class="list-company">（パラマウントベッド）</span></div></label>
+    <label for="b10" class="booth-list-item"><span class="badge c-green">10</span><div><span class="list-product">Sleephoria</span><span class="list-company">（パラマウントウェルネス）</span></div></label>
+  </div>
+
+  <!-- ==================== 2階 全ブース一覧（11〜16） ==================== -->
+  <div class="list-container" id="list-2f">
+    <div class="list-title">2階 出展一覧（タップで詳細表示）</div>
+    <label for="b11" class="booth-list-item"><span class="badge c-green">11</span><div><span class="list-product">PB-Method</span><span class="list-company">（パラマウントベッド）</span></div></label>
+    <label for="b12" class="booth-list-item"><span class="badge c-yellow">12</span><div><span class="list-product">おむつナビ</span><span class="list-company">（光洋）</span></div></label>
+    <label for="b13" class="booth-list-item"><span class="badge c-yellow">13</span><div><span class="list-product">Dfree Professional</span><span class="list-company">（Dfree）</span></div></label>
+    <label for="b14" class="booth-list-item"><span class="badge c-yellow">14</span><div><span class="list-product">おむつCOLOR</span><span class="list-company">（パラマウントベッド）</span></div></label>
+    <label for="b15" class="booth-list-item"><span class="badge c-yellow">15</span><div><span class="list-product">トイレDIARY</span><span class="list-company">（パラマウントベッド）</span></div></label>
+    <label for="b16" class="booth-list-item"><span class="badge c-green">16</span><div><span class="list-product">福祉用具展示コーナー</span><span class="list-company">（パラマウントケアサービス）</span></div></label>
+  </div>
+
+</body>
+</html>
