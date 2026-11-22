@@ -107,8 +107,8 @@
   .notice-accordion[open] summary::after {
     content: "－";
   }
-  .notice-body {
-    padding: 12px 14px;
+.notice-body {
+    padding: 12px 10px;   /* 左右の余白を 14px → 10px に変更（これで+8px） */
     background-color: #f8f4ef;
     border-top: 1px solid var(--border-soft);
   }
@@ -123,19 +123,19 @@
   .notice-item {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 8px;             /* アイコンとの隙間を 12px → 8px に変更（これで+4px） */
   }
   .notice-icon {
-    width: 40px;
-    height: 40px;
+    width: 36px;          /* アイコン枠も 40px → 36px に微調整（これで+4px） */
+    height: 36px;
     flex-shrink: 0;
     display: flex;
     align-items: center;
     justify-content: center;
   }
   .notice-icon svg {
-    width: 38px;
-    height: 38px;
+    width: 36px;
+    height: 36px;
     display: block;
   }
   .notice-text {
