@@ -621,13 +621,14 @@
     margin: 0 0 12px;
     line-height: 1.45;
   }
-  .survey-btn {
+.survey-btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 6px;
     width: 100%;
     max-width: 360px;
+    box-sizing: border-box; /* ← これを追加！ */
     padding: 11px 18px;
     border-radius: 999px;
     background-color: var(--accent-coral);
